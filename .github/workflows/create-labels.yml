@@ -23,6 +23,23 @@ jobs:
   create:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug: show repository and actor
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log('context.repo:', JSON.stringify(context.repo));
+            console.log('actor:', context.actor);
+            // Try a basic repository API call to ensure token works
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            try {
+              await github.rest.repos.get({ owner, repo });
+              console.log('Repo access OK');
+            } catch (err) {
+              console.error('Repo access failed', err.message || err);
+              throw err;
+            }
+
       - name: Create labels
         uses: actions/github-script@v7
         with:
