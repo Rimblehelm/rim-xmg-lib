@@ -8,11 +8,16 @@ on:
   # and can be invoked via the REST API. Use it as a fallback in case the
   # `repository` event (created) is not supported in the repo environment.
   repository_dispatch:
+  # Also try the `repository` event for immediate bootstrapping on repo creation
+  # (some environments or organizations support `repository`->`created`).
+  repository:
+    types: [ created ]
   schedule:
     - cron: '0 3 * * 0' # weekly at 03:00 UTC on Sundays
 
 permissions:
   issues: write
+  contents: read
 
 jobs:
   create:
