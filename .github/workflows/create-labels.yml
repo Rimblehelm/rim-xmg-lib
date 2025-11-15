@@ -50,7 +50,14 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            const { data } = await github.rest.repos.getContent({ owner, repo, path: '.github/labels.json' });
+            let data;
+            try {
+              const resp = await github.rest.repos.getContent({ owner, repo, path: '.github/labels.json' });
+              data = resp.data;
+            } catch (err) {
+              console.error('Error reading .github/labels.json via REST API', err.status || err.message || err);
+              throw err;
+            }
             const content = Buffer.from(data.content, 'base64').toString('utf8');
             const labels = JSON.parse(content);
             // Determine if this is a first-run by checking if the repository
