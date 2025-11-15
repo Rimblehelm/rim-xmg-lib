@@ -6,6 +6,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      use_npm:
+        description: 'Publish to npmjs.org instead of GitHub Packages'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read
@@ -32,7 +38,25 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to GitHub Packages
-        run: npm publish --registry https://npm.pkg.github.com/
+      - name: Determine publish registry/token
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Default to GitHub Packages token
+          echo "PUBLISH_REGISTRY=https://npm.pkg.github.com/" >> $GITHUB_ENV
+          echo "NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+          # If this workflow was manually dispatched with use_npm=true, switch to npmjs registry
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.use_npm }}" = "true" ]; then
+            if [ -z "$NPM_TOKEN" ]; then
+              echo "ERROR: NPM_TOKEN must be set to publish to npmjs.org. Add it in Settings → Secrets and variables → Actions.";
+              exit 1;
+            fi
+            echo "PUBLISH_REGISTRY=https://registry.npmjs.org/" >> $GITHUB_ENV
+            echo "NODE_AUTH_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
+          fi
+
+      - name: Publish to npm registry
+        run: npm publish --registry $PUBLISH_REGISTRY
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
