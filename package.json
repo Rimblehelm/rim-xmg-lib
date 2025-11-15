@@ -1,0 +1,62 @@
+{
+	"name": "@rimblehelm/rim-xmg-lib",
+	"version": "0.0.1",
+	"description": "A TypeScript library for blockchain utilities related to the Coin Magi (XMG) cryptocurrency.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rimblehelm/rim-xmg-lib.git"
+	},
+	"homepage": "https://rimblehelm.github.io/rim-xmg-lib/",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+	"scripts": {
+		"build": "tsc --project ./tsconfig.json",
+		"lint": "eslint \"src/**/*.ts\"",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"clean": "rimraf dist",
+		"prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build",
+		"docs": "typedoc --options typedoc.json",
+		"docs:build": "npm run docs && echo \"Docs generated in ./docs\"",
+		"docs:md": "typedoc --options typedoc.json"
+		,"changelog": "auto-changelog -p"
+	},
+	"keywords": [
+		"blockchain",
+		"transaction",
+		"XMG",
+		"XMGBlock",
+		"block-chain",
+		"block-explorer",
+		"cryptocurrency",
+		"TypeScript",
+		"blockchain-transaction",
+		"script-signature"
+	],
+	"author": "Michael Kelly <mikee.h.kelly@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"@typescript-eslint/eslint-plugin": "^7.0.0",
+		"@typescript-eslint/parser": "^7.0.0",
+		"@vitest/coverage-v8": "^4.0.8",
+		"dotenv": "^17.2.3",
+		"eslint": "^8.56.0",
+		"eslint-plugin-jsdoc": "^39.9.1",
+		"rimraf": "^5.0.0",
+		"typedoc": "^0.28.14",
+		"typedoc-plugin-markdown": "^4.9.0",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.8",
+		"auto-changelog": "^2.3.0"
+	}
+
+}

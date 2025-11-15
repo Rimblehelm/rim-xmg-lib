@@ -1,0 +1,35 @@
+name: Generate Changelog
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  changelog:
+    name: Generate CHANGELOG.md
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install
+        run: npm ci
+
+      - name: Generate changelog
+        run: npm run changelog
+
+      - name: Commit and push changelog
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: update CHANGELOG.md [skip ci]"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

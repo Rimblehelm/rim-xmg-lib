@@ -1,0 +1,13 @@
+[
+  { "name": "feature", "color": "0e8a16", "description": "New feature or enhancement" },
+  { "name": "bug", "color": "d73a4a", "description": "Bug fixes" },
+  { "name": "docs", "color": "0075ca", "description": "Documentation changes" },
+  { "name": "chore", "color": "8c6dba", "description": "Maintenance tasks" },
+  { "name": "tests", "color": "c2e0c6", "description": "Tests and test-related changes" },
+  { "name": "ci", "color": "0052cc", "description": "CI and build configuration" },
+  { "name": "refactor", "color": "fbca04", "description": "Code refactor with no functional change" },
+  { "name": "breaking", "color": "b60205", "description": "Breaking changes" },
+  { "name": "security", "color": "d4c5f9", "description": "Security fixes" },
+  { "name": "dependencies", "color": "0366d6", "description": "Dependency upgrade or lockfile changes" },
+  { "name": "examples", "color": "1d76db", "description": "Example code and demos" }
+]

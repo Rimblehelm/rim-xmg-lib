@@ -1,0 +1,186 @@
+[**rim-xmg-lib**](../../README.md)
+
+***
+
+[rim-xmg-lib](../../modules.md) / [src](../README.md) / XMGInput
+
+# Class: XMGInput
+
+Defined in: src/XMGInput.ts:24
+
+Represents a Coin Magi (XMG) transaction input.
+
+Provides helpers for parsing raw vin JSON and for serializing back to the
+RPC-compatible structure.
+
+## Constructors
+
+### Constructor
+
+> **new XMGInput**(`input`): `XMGInput`
+
+Defined in: src/XMGInput.ts:37
+
+Constructs a new XMGInput from a raw `IVin` object.
+
+#### Parameters
+
+##### input
+
+[`IVin`](../interfaces/IVin.md)
+
+Raw input JSON matching `IVin`.
+   *
+
+#### Returns
+
+`XMGInput`
+
+#### Example
+
+```ts
+* const input = new XMGInput({ txid: 'abc', vout: 1, sequence: 0 });
+```
+
+## Properties
+
+### Coinbase?
+
+> `optional` **Coinbase**: `string`
+
+Defined in: src/XMGInput.ts:25
+
+***
+
+### OutputIndex?
+
+> `optional` **OutputIndex**: `number`
+
+Defined in: src/XMGInput.ts:27
+
+***
+
+### ScriptSignature?
+
+> `optional` **ScriptSignature**: [`XMGScriptSignature`](XMGScriptSignature.md)
+
+Defined in: src/XMGInput.ts:28
+
+***
+
+### Sequence
+
+> **Sequence**: `number`
+
+Defined in: src/XMGInput.ts:29
+
+***
+
+### TransactionID?
+
+> `optional` **TransactionID**: `string`
+
+Defined in: src/XMGInput.ts:26
+
+## Accessors
+
+### isCoinbase
+
+#### Get Signature
+
+> **get** **isCoinbase**(): `boolean`
+
+Defined in: src/XMGInput.ts:72
+
+True when this input is a coinbase (mined reward) input.
+   *
+
+##### Returns
+
+`boolean`
+
+`true` when this input is coinbase.
+
+***
+
+### isTransaction
+
+#### Get Signature
+
+> **get** **isTransaction**(): `boolean`
+
+Defined in: src/XMGInput.ts:79
+
+True when this input references a previous transaction output.
+   *
+
+##### Returns
+
+`boolean`
+
+`true` when input references previous tx + output.
+
+## Methods
+
+### toJSON()
+
+> **toJSON**(): [`IVin`](../interfaces/IVin.md)
+
+Defined in: src/XMGInput.ts:87
+
+Serialize an XMGInput back to JSON compatible with `IVin`.
+
+#### Returns
+
+[`IVin`](../interfaces/IVin.md)
+
+IVin structure.
+
+***
+
+### fromArray()
+
+> `static` **fromArray**(`rawArray`): `XMGInput`[]
+
+Defined in: src/XMGInput.ts:62
+
+Map an array of raw `IVin` objects into an array of `XMGInput`.
+Safely returns an empty array if provided value is not an array.
+
+#### Parameters
+
+##### rawArray
+
+Array-like input to convert.
+
+`any`[] | [`IVin`](../interfaces/IVin.md)[]
+
+#### Returns
+
+`XMGInput`[]
+
+An array of XMGInput instances.
+
+***
+
+### fromJSON()
+
+> `static` **fromJSON**(`raw`): `XMGInput`
+
+Defined in: src/XMGInput.ts:53
+
+Construct an XMGInput from raw JSON.
+
+#### Parameters
+
+##### raw
+
+[`IVin`](../interfaces/IVin.md)
+
+Raw IVin object.
+
+#### Returns
+
+`XMGInput`
+
+A normalized XMGInput instance.

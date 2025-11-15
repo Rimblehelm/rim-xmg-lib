@@ -1,0 +1,18 @@
+# maps file paths to labels
+# PRs that change these files will be automatically labeled
+docs/**/*.md:
+  - docs
+README.md:
+  - docs
+examples/**:
+  - examples
+tests/**:
+  - tests
+.github/workflows/**:
+  - ci
+package.json:
+  - dependencies
+package-lock.json:
+  - dependencies
+pnpm-lock.yaml:
+  - dependencies
