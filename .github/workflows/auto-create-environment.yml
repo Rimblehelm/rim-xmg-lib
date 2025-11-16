@@ -14,7 +14,8 @@ jobs:
     if: github.event.repository.is_template == true
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ADMIN_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+      FALLBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout
@@ -24,9 +25,24 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y gh
-      - name: Authenticate GH CLI with token
+      - name: Setup GH token for environment creation
         run: |
-          echo "${GH_TOKEN}" | gh auth login --with-token
+          if [ -n "${ADMIN_TOKEN}" ]; then
+            echo "Using ADMIN_GITHUB_TOKEN from repository secrets (recommended)."
+            echo "${ADMIN_TOKEN}" | gh auth login --with-token
+          else
+            echo "ADMIN_GITHUB_TOKEN is not set; falling back to GITHUB_TOKEN (may not have permission)."
+            echo "${FALLBACK_TOKEN}" | gh auth login --with-token
+          fi
+
+      - name: Validate ADMIN_GITHUB_TOKEN for auto-create
+        run: |
+          # The auto-create workflow requires elevated permissions; fail early with a clear message
+          if [ -z "${ADMIN_TOKEN}" ]; then
+            echo "ERROR: ADMIN_GITHUB_TOKEN is not set. To automatically create environments on repo creation, add a repository secret ADMIN_GITHUB_TOKEN with a personal access token that has the 'repo' scope."
+            exit 1
+          fi
+          fi
 
       - name: Create release and docs environments
         run: |

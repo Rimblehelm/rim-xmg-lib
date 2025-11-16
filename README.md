@@ -202,6 +202,14 @@ gh workflow run "Create Release Environment" --repo rimblehelm/rim-xmg-lib --ref
 	- Run the workflow manually from an admin account, or
 	- Run the `scripts/create-environment.sh` / `scripts/create-environment.ps1` locally under a user with admin rights.
 
+If you'd like the workflow to be run by Automation (e.g., on repository creation), create a repository secret named `ADMIN_GITHUB_TOKEN` containing a personal access token (PAT) with adequate permissions. This PAT must be created by an account that has admin access to the repository.
+
+How to create the PAT and secret:
+- Generate a Personal Access Token (classic) with the `repo` scope (and `admin:org` if you plan to add org teams as reviewers) at https://github.com/settings/tokens
+- On the repository settings, go to `Settings -> Secrets and variables -> Actions -> New repository secret` and add the token as `ADMIN_GITHUB_TOKEN`.
+
+When `ADMIN_GITHUB_TOKEN` is present the `Create Release Environment` and `Auto-create Release Environment` workflows will use it to create environments and add protection rules automatically; otherwise the workflows fallback to the default `GITHUB_TOKEN` (which often lacks admin rights and can produce a 403 error).
+
 - The workflow itself sets up the environment and creates a protection rule that requires at least 1 approving reviewer from the list you provide. After the environment exists, the `release.yml` workflow will pause at the environment approval step and require a reviewer to approve.
 
 If you prefer automated environment creation from CI (not recommended for security reasons), tell me and I can add an extra trigger to automate it on a push to `master`.

@@ -30,8 +30,23 @@ REPO=$(echo "$REPO_FULL" | cut -d/ -f2)
 
 echo "Creating environment '$ENV_NAME' in $REPO_FULL"
 
+# If no GH_TOKEN env var is present, ensure the local gh CLI is authenticated.
+if [ -z "${GH_TOKEN:-}" ]; then
+  if ! gh auth status >/dev/null 2>&1; then
+    echo "ERROR: GH_TOKEN is not set and gh is not authenticated."
+    echo "If running in GitHub Actions, set the ADMIN_GITHUB_TOKEN repository secret to a personal access token with 'repo' (and 'admin:org' if needed) and re-run."
+    echo "If running locally, run 'gh auth login' to authenticate or set GH_TOKEN."
+    exit 1
+  fi
+fi
+
 # Create or update environment
-gh api --method PUT "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}" || true
+if ! gh api --method PUT "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}" >/dev/null 2>&1; then
+  echo "ERROR: couldn't create or update environment '${ENV_NAME}'."
+  echo "This typically is caused by insufficient permissions for the token used by gh (HTTP 403)."
+  echo "For GitHub Actions, set the repository secret ADMIN_GITHUB_TOKEN to a personal access token that has the 'repo' scope and try again."
+  exit 1
+fi
 
 if [ -n "$REVIEWERS" ]; then
   # reviewers is comma separated; can be users or teams (teams require org/team slug)

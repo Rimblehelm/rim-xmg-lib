@@ -15,7 +15,34 @@ $owner, $repoName = $repo -split '/' , 2
 
 Write-Host "Creating environment '$EnvironmentName' in $repo"
 
-gh api --method PUT "/repos/$owner/$repoName/environments/$EnvironmentName" | Out-Null
+# If no GH_TOKEN env var is present, ensure the local gh CLI is authenticated.
+if (-not $env:GH_TOKEN) {
+  $authOk = $false
+  try {
+    gh auth status > $null 2> $null
+    $authOk = $true
+  } catch {
+    $authOk = $false
+  }
+  if (-not $authOk) {
+    Write-Host "ERROR: GH_TOKEN is not set and gh is not authenticated."
+    Write-Host "If running in GitHub Actions, set the ADMIN_GITHUB_TOKEN repository secret to a personal access token with 'repo' and optionally 'admin:org' scopes."
+    Write-Host "If running locally, run 'gh auth login' to authenticate or set GH_TOKEN."
+    exit 1
+  }
+
+  try {
+    gh api --method PUT "/repos/$owner/$repoName/environments/$EnvironmentName" > $null 2> $null
+  } catch {
+    Write-Host "ERROR: Couldn't create or update environment '$EnvironmentName'. This usually means the token used by gh lacks permission (HTTP 403)."
+    Write-Host "When running from Actions, configure the ADMIN_GITHUB_TOKEN repository secret with a PAT that has the 'repo' scope and try again."
+    exit 1
+  }
+if (-not (gh api --method PUT "/repos/$owner/$repoName/environments/$EnvironmentName" 2>$null)) {
+  Write-Host "ERROR: Couldn't create or update environment '$EnvironmentName'. This usually means the token used by gh lacks permission (HTTP 403)."
+  Write-Host "When running from Actions, configure the ADMIN_GITHUB_TOKEN repository secret with a PAT that has the 'repo' scope and try again."
+  exit 1
+}
 
 if ($Reviewers -ne "") {
   $reviewerList = $Reviewers -split ',' | ForEach-Object { $_.Trim() }

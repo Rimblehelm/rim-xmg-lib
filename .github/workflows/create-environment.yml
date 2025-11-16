@@ -28,9 +28,25 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gh
 
+      - name: Setup GH token for environment creation
+        env:
+          ADMIN_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          FALLBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Prefer a repository secret ADMIN_GITHUB_TOKEN (personal access token)
+          # because the default GITHUB_TOKEN is limited and may not have rights
+          # to create environments or set protection rules.
+          if [ -n "${ADMIN_TOKEN}" ]; then
+            echo "Using ADMIN_GITHUB_TOKEN from repository secrets (recommended)."
+            echo "GH_TOKEN=${ADMIN_TOKEN}" >> $GITHUB_ENV
+          else
+            echo "ADMIN_GITHUB_TOKEN is not set; falling back to GITHUB_TOKEN (may not have permission)."
+            echo "GH_TOKEN=${FALLBACK_TOKEN}" >> $GITHUB_ENV
+          fi
+
       - name: Create environment and add reviewers
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           chmod +x ./scripts/create-environment.sh
           ./scripts/create-environment.sh "${{ github.event.inputs.envName }}" "${{ github.event.inputs.reviewers }}"
