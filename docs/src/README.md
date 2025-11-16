@@ -1,8 +1,8 @@
-[**rim-xmg-lib**](../README.md)
+[**@rimblehelm/rim-xmg-lib**](../README.md)
 
 ***
 
-[rim-xmg-lib](../modules.md) / src
+[@rimblehelm/rim-xmg-lib](../modules.md) / src
 
 # src
 

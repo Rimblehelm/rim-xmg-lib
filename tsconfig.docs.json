@@ -4,6 +4,7 @@
     "rootDir": "./",
     "outDir": "dist-docs",
     "declaration": false
+    ,"skipLibCheck": true
   },
   "include": ["src", "examples"]
 }

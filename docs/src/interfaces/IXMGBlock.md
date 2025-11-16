@@ -1,12 +1,12 @@
-[**rim-xmg-lib**](../../README.md)
+[**@rimblehelm/rim-xmg-lib**](../../README.md)
 
 ***
 
-[rim-xmg-lib](../../modules.md) / [src](../README.md) / IXMGBlock
+[@rimblehelm/rim-xmg-lib](../../modules.md) / [src](../README.md) / IXMGBlock
 
 # Interface: IXMGBlock
 
-Defined in: src/XMGBlock.ts:4
+Defined in: [src/XMGBlock.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L4)
 
 Interface representing the raw JSON structure of a Coin Magi (XMG) block.
 
@@ -16,7 +16,7 @@ Interface representing the raw JSON structure of a Coin Magi (XMG) block.
 
 > **bits**: `string`
 
-Defined in: src/XMGBlock.ts:14
+Defined in: [src/XMGBlock.ts:14](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L14)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/XMGBlock.ts:14
 
 > **confirmations**: `number`
 
-Defined in: src/XMGBlock.ts:6
+Defined in: [src/XMGBlock.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L6)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/XMGBlock.ts:6
 
 > **difficulty**: `number`
 
-Defined in: src/XMGBlock.ts:15
+Defined in: [src/XMGBlock.ts:15](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L15)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/XMGBlock.ts:15
 
 > **entropybit**: `number`
 
-Defined in: src/XMGBlock.ts:20
+Defined in: [src/XMGBlock.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L20)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/XMGBlock.ts:20
 
 > **flags**: `string`
 
-Defined in: src/XMGBlock.ts:18
+Defined in: [src/XMGBlock.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L18)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/XMGBlock.ts:18
 
 > **hash**: `string`
 
-Defined in: src/XMGBlock.ts:5
+Defined in: [src/XMGBlock.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L5)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: src/XMGBlock.ts:5
 
 > **height**: `number`
 
-Defined in: src/XMGBlock.ts:8
+Defined in: [src/XMGBlock.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L8)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: src/XMGBlock.ts:8
 
 > **merkleroot**: `string`
 
-Defined in: src/XMGBlock.ts:10
+Defined in: [src/XMGBlock.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L10)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: src/XMGBlock.ts:10
 
 > **mint**: `string` \| `number`
 
-Defined in: src/XMGBlock.ts:11
+Defined in: [src/XMGBlock.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L11)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: src/XMGBlock.ts:11
 
 > **modifier**: `string`
 
-Defined in: src/XMGBlock.ts:21
+Defined in: [src/XMGBlock.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L21)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: src/XMGBlock.ts:21
 
 > **modifierchecksum**: `string`
 
-Defined in: src/XMGBlock.ts:22
+Defined in: [src/XMGBlock.ts:22](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L22)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: src/XMGBlock.ts:22
 
 > `optional` **nextblockhash**: `string`
 
-Defined in: src/XMGBlock.ts:17
+Defined in: [src/XMGBlock.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L17)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: src/XMGBlock.ts:17
 
 > **nonce**: `number`
 
-Defined in: src/XMGBlock.ts:13
+Defined in: [src/XMGBlock.ts:13](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L13)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: src/XMGBlock.ts:13
 
 > `optional` **previousblockhash**: `string`
 
-Defined in: src/XMGBlock.ts:16
+Defined in: [src/XMGBlock.ts:16](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L16)
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: src/XMGBlock.ts:16
 
 > **proofhash**: `string`
 
-Defined in: src/XMGBlock.ts:19
+Defined in: [src/XMGBlock.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L19)
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: src/XMGBlock.ts:19
 
 > **signature**: `string`
 
-Defined in: src/XMGBlock.ts:24
+Defined in: [src/XMGBlock.ts:24](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L24)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: src/XMGBlock.ts:24
 
 > **size**: `number`
 
-Defined in: src/XMGBlock.ts:7
+Defined in: [src/XMGBlock.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L7)
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: src/XMGBlock.ts:7
 
 > **time**: `number`
 
-Defined in: src/XMGBlock.ts:12
+Defined in: [src/XMGBlock.ts:12](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L12)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: src/XMGBlock.ts:12
 
 > **tx**: `string`[]
 
-Defined in: src/XMGBlock.ts:23
+Defined in: [src/XMGBlock.ts:23](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L23)
 
 ***
 
@@ -168,4 +168,4 @@ Defined in: src/XMGBlock.ts:23
 
 > **version**: `number`
 
-Defined in: src/XMGBlock.ts:9
+Defined in: [src/XMGBlock.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L9)

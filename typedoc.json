@@ -1,6 +1,7 @@
 {
   "entryPoints": ["src/index.ts", "examples/transaction-example.ts"],
   "out": "docs",
+  "exclude": ["**/node_modules/**"],
   "tsconfig": "./tsconfig.docs.json",
   "excludeExternals": true,
   "includeVersion": false,

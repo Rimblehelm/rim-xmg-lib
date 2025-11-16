@@ -1,14 +1,14 @@
-[**rim-xmg-lib**](../../README.md)
+[**@rimblehelm/rim-xmg-lib**](../../README.md)
 
 ***
 
-[rim-xmg-lib](../../modules.md) / [src](../README.md) / default
+[@rimblehelm/rim-xmg-lib](../../modules.md) / [src](../README.md) / default
 
 # Variable: default
 
 > **default**: `object`
 
-Defined in: src/index.ts:30
+Defined in: [src/index.ts:30](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/index.ts#L30)
 
 ## Type Declaration
 

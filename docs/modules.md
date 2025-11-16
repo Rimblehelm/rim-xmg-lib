@@ -1,8 +1,8 @@
-[**rim-xmg-lib**](README.md)
+[**@rimblehelm/rim-xmg-lib**](README.md)
 
 ***
 
-# rim-xmg-lib
+# @rimblehelm/rim-xmg-lib
 
 ## Modules
 
