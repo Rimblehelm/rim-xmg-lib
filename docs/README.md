@@ -7,6 +7,8 @@
 [![Docs CI](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
 
+[![Publish readiness](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/rimblehelm/rim-xmg-lib/main/docs/SECRETS_STATUS.json)](../docs/SECRETS_STATUS.md)
+
 A small TypeScript utility library for parsing Coin Magi (XMG) blocks and transactions.
 
 ## Quick start

@@ -1,17 +1,18 @@
 name: Create default labels
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   push:
     branches: [ main ]
   # repository dispatch is a more widely supported manual bootstrap trigger
   # and can be invoked via the REST API. Use it as a fallback in case the
   # `repository` event (created) is not supported in the repo environment.
-  repository_dispatch:
+  repository_dispatch: {}
   # Also try the `repository` event for immediate bootstrapping on repo creation
   # (some environments or organizations support `repository`->`created`).
-  repository:
-    types: [ created ]
+  # NOTE: `repository` may not be supported in all environments. Keep the
+  # repository_dispatch trigger for wider compatibility, and avoid the
+  # `repository` event if your Actions linter flags it as "Unexpected value".
   schedule:
     - cron: '0 3 * * 0' # weekly at 03:00 UTC on Sundays
 
@@ -23,7 +24,7 @@ jobs:
   create:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug: show repository and actor
+      - name: "Debug: show repository and actor"
         uses: actions/github-script@v7
         with:
           script: |
@@ -40,7 +41,7 @@ jobs:
               throw err;
             }
 
-      - name: Create labels
+      - name: "Create labels"
         uses: actions/github-script@v7
         with:
           script: |

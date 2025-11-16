@@ -1,0 +1,21 @@
+name: Check NPM token
+description: Check whether NPM_TOKEN is set and is an Automation token
+inputs:
+  npm-token:
+    description: 'Optional npm token to use, overrides environment'
+    required: false
+outputs:
+  result:
+    description: 'Human-readable result of the check'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Use node to check npm token
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.npm-token }}" ]; then
+          export NPM_TOKEN="${{ inputs.npm-token }}"
+        fi
+        RESULT=$(node ./scripts/check-npm-token-cli.js 2>/dev/null || echo "NPM_TOKEN check failed")
+        echo "result=$RESULT" >> $GITHUB_OUTPUT

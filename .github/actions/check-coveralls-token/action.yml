@@ -1,0 +1,25 @@
+name: 'Check Coveralls Token'
+
+description: 'Check the provided COVERALLS_REPO_TOKEN via Coveralls API.'
+
+inputs:
+  coveralls-token:
+    description: 'The Coveralls repo token to check (optional)'
+    required: false
+
+outputs:
+  result:
+    description: 'Result string: success or fail'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run coveralls token check
+      shell: bash
+      run: |
+        # Allow token via input or env
+        if [ -n "${{ inputs.coveralls-token }}" ]; then
+          export COVERALLS_REPO_TOKEN="${{ inputs.coveralls-token }}"
+        fi
+        chmod +x ./scripts/check-coveralls-token.js || true
+        node ./scripts/check-coveralls-token.js && echo "result=success" >> $GITHUB_OUTPUT || echo "result=fail" >> $GITHUB_OUTPUT

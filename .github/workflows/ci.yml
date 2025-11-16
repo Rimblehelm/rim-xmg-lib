@@ -9,7 +9,10 @@ on:
 jobs:
   build-and-test:
     name: Lint, Typecheck, Test
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,23 +33,47 @@ jobs:
       - name: Unit tests (with coverage)
         run: npm run test:coverage
       - name: Check for Coveralls secret
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
-          if [ -z "${COVERALLS_REPO_TOKEN}" ]; then
+          if [ -z "${{ secrets.COVERALLS_REPO_TOKEN }}" ]; then
             echo "ERROR: COVERALLS_REPO_TOKEN is not set. Add it in Settings → Secrets and variables → Actions.";
             exit 1;
           fi
+        shell: bash
+      - name: Validate Coveralls secret (warn-only)
+        run: |
+          chmod +x ./scripts/validate-secrets.sh || true
+          ./scripts/validate-secrets.sh COVERALLS_REPO_TOKEN --warn
+        # no extra env block — set above
+        shell: bash
+
+      - name: Check Coveralls token (warn-only)
+        id: coveralls_check
+        uses: ./.github/actions/check-coveralls-token
+        with:
+          coveralls-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+      - name: Check NPM token (warn-only)
+        id: npm_check_ci
+        uses: ./.github/actions/check-npm-token
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Show npm token check result
+        run: |
+          echo "NPM token check (warn-only): ${{ steps.npm_check_ci.outputs.result }}"
+        shell: bash
       - name: Upload coverage to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        if: env.COVERALLS_REPO_TOKEN != ''
         uses: coverallsapp/github-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        # env already set above
 
       - name: Comment with Coveralls link (PRs only)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && ${{ secrets.COVERALLS_REPO_TOKEN }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

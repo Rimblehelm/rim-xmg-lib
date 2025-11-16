@@ -17,6 +17,19 @@ on:
         required: false
         default: 'true'
 
+# Quick notes for maintainers:
+# - Inputs:
+#   - use_npm: when `true`, the workflow will attempt to publish to npmjs.org instead of GitHub Packages.
+#   - use_oidc: when `true` and `use_npm==true`, the workflow will try Trusted Publishing (OIDC) for npmjs; no
+#     `NPM_TOKEN` secret is required. If `use_oidc` is `false`, an `NPM_TOKEN` Automation token is required.
+#
+# - Secrets:
+#   - `GITHUB_TOKEN` is provided automatically by GitHub Actions and is used to publish to GitHub Packages.
+#   - `NPM_TOKEN` (optional): set this only if you want to publish to npmjs.org using token-based auth
+#     (`use_npm=true` and `use_oidc=false`). Create an Automation token on npmjs.com and store it as this secret.
+#
+# For details and troubleshooting steps look at `README.md` and `docs/SECRETS.md`.
+
 permissions:
   contents: read
   packages: write
@@ -52,7 +65,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Determine publish registry/token
+      - name: Determine publish registry
+        run: |
+          # Default to GitHub Packages token
+          echo "PUBLISH_REGISTRY=https://npm.pkg.github.com/" >> $GITHUB_ENV
+          echo "NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Determine npm publish config (manual dispatch only)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -65,7 +85,7 @@ jobs:
             echo "PUBLISH_REGISTRY=https://registry.npmjs.org/" >> $GITHUB_ENV
             if [ "${{ github.event.inputs.use_oidc }}" = "true" ]; then
               echo "Using Trusted Publishing (OIDC) for npmjs.org — no NPM_TOKEN required (ensure Trusted Publisher on npmjs is configured)."
-            else
+              else
               if [ -z "$NPM_TOKEN" ]; then
                 echo "ERROR: NPM_TOKEN must be set to publish to npmjs.org. Add it in Settings → Secrets and variables → Actions.";
                 exit 1;
@@ -73,6 +93,39 @@ jobs:
               echo "NODE_AUTH_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
             fi
           fi
+
+      - name: Validate required secrets (manual dispatch)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          chmod +x ./scripts/validate-secrets.sh || true
+          ./scripts/validate-secrets.sh NPM_TOKEN
+
+      - name: Fail early when npm publish requested but NPM_TOKEN missing
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NPM_TOKEN:-}" ]; then
+            echo "ERROR: Publishing to npmjs.org requested via 'use_npm=true' and OIDC is disabled (use_oidc=false), but NPM_TOKEN is not set in repository secrets.";
+            echo "Please either enable OIDC (use_oidc=true) or configure an Automation token on npmjs.com and add it to GitHub as 'NPM_TOKEN'";
+            exit 1
+          fi
+
+      - name: Check NPM token type (automation) using local action
+        id: npm_check_action
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' }}
+        uses: ./.github/actions/check-npm-token
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Fail when NPM token is not Automation type
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' && !contains(steps.npm_check_action.outputs.result, 'automation token found') }}
+        run: |
+          echo "ERROR: NPM_TOKEN is present but does not appear to be an Automation token according to npm token list.";
+          echo "Fix: create an npm Automation token in https://www.npmjs.com/settings/access-tokens and add it to GitHub Secrets as NPM_TOKEN.";
+          exit 1
 
       - name: Configure npm auth for registry
         run: |
