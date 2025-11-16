@@ -5,6 +5,7 @@
 [![Docs CI](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Release](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml)
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
+[![Docs Deploy](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Coverage](https://coveralls.io/repos/github/rimblehelm/rim-xmg-lib/badge.svg?branch=main)](https://coveralls.io/github/rimblehelm/rim-xmg-lib)
 Note: Coveralls will post a comment on pull requests with a link to the coverage report.
 

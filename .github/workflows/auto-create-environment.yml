@@ -22,8 +22,10 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gh
 
-      - name: Create release environment
+      - name: Create release and docs environments
         run: |
           chmod +x ./scripts/create-environment.sh
-          # no reviewers by default — admins can add them later
+          # Create release env
           ./scripts/create-environment.sh release ""
+          # Create docs env to gate GitHub Pages deployment
+          ./scripts/create-environment.sh docs ""
