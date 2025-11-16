@@ -173,6 +173,25 @@ Example (PowerShell):
 
 The script will create the environment and add a protection rule requiring reviews from the specified users or teams. Use this if you want a human to approve the release job before GitHub Actions publishes the package.
 
+GitHub Actions — create environment workflow
+--------------------------------------------
+
+We've added a `Create Release Environment` workflow to let repository admins create an environment and protection rules from the GitHub Actions UI (or via GH CLI). This is particularly helpful for protecting the `release` environment used by the `release.yml` workflow. Quick notes:
+
+- Run the workflow via the Actions UI (search for "Create Release Environment") or from the CLI:
+
+```pwsh
+gh workflow run "Create Release Environment" --repo rimblehelm/rim-xmg-lib --ref master --field envName=release --field reviewers="mikee.kelly,orgname/reviewers-team"
+```
+
+- Required permissions: the `GITHUB_TOKEN` used by workflow must belong to a user with permissions to manage environments and protection rules, so you must either:
+	- Run the workflow manually from an admin account, or
+	- Run the `scripts/create-environment.sh` / `scripts/create-environment.ps1` locally under a user with admin rights.
+
+- The workflow itself sets up the environment and creates a protection rule that requires at least 1 approving reviewer from the list you provide. After the environment exists, the `release.yml` workflow will pause at the environment approval step and require a reviewer to approve.
+
+If you prefer automated environment creation from CI (not recommended for security reasons), tell me and I can add an extra trigger to automate it on a push to `master`.
+
 Generate API docs locally:
 
 ```bash
