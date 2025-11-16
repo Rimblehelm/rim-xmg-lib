@@ -21,4 +21,14 @@ describe('check-npm-token-runner', () => {
     stub.mockRestore();
     delete process.env.NPM_TOKEN;
   });
+
+  it('handles token present but no automation token', () => {
+    const cp = require('child_process');
+    const stub = vi.spyOn(cp, 'execSync').mockImplementation(() => Buffer.from(JSON.stringify([{ id: '1', type: 'publish' }])));
+    process.env.NPM_TOKEN = 'fake-token';
+    const res = runner.runTokenCheck();
+    expect(res).toMatch(/no automation token found/);
+    stub.mockRestore();
+    delete process.env.NPM_TOKEN;
+  });
 });

@@ -1,0 +1,5 @@
+{
+  "type":"required_reviewers",
+  "reviewers":[{"type":"User","id":39779980}],
+  "required_approving_review_count":1
+}

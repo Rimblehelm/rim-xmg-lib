@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGBlock = void 0;
 /**
  * Represents a Coin Magi (XMG) block.
  * Construct with raw JSON (e.g. an element from blocks.json) or use fromJSON/fromArray helpers.
@@ -8,7 +11,7 @@
  * The model normalizes certain fields (e.g. `mint` which can be a string)
  * and exposes convenience getters for commonly useful checks.
  */
-export class XMGBlock {
+class XMGBlock {
     /**
      * Create a new XMGBlock instance from raw block JSON.
      * @param data - Raw `IXMGBlock` object returned by node or explorer.
@@ -72,7 +75,8 @@ export class XMGBlock {
             version: this.version,
             merkleroot: this.merkleRoot,
             mint: this.mint,
-            time: this.time.getDate() / 1000,
+            // Use Unix epoch seconds for time (Date.getTime() returns ms)
+            time: Math.floor(this.time.getTime() / 1000),
             nonce: this.nonce,
             bits: this.bits,
             difficulty: this.difficulty,
@@ -124,4 +128,5 @@ export class XMGBlock {
         return this.transactions.length;
     }
 }
+exports.XMGBlock = XMGBlock;
 //# sourceMappingURL=XMGBlock.js.map

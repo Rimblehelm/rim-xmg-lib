@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/index.ts:30](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/index.ts#L30)
+Defined in: [src/index.ts:30](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/index.ts#L30)
 
 ## Type Declaration
 

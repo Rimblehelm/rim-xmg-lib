@@ -7,10 +7,11 @@
     "outDir": "dist",
     "rootDir": "src",
     "strict": true,
-    "types": ["node", "vitest"],
+    "types": ["node"],
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
     "sourceMap": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "tests"]
 }

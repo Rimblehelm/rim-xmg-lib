@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGScriptPublicKey = void 0;
 /**
  * Represents a Coin Magi (XMG) script public key.
  * Construct with raw JSON (e.g. scriptPubKey element) or use fromJSON/fromArray helpers.
@@ -8,7 +11,7 @@
  * The class is a thin wrapper over the raw JSON produced by a node. It
  * normalizes the common fields and exposes a `toJSON` helper.
  */
-export class XMGScriptPublicKey {
+class XMGScriptPublicKey {
     /**
      * Initialize a new `XMGScriptPublicKey` from raw JSON
      * @param scriptPubKey - Raw scriptPubKey object
@@ -54,4 +57,5 @@ export class XMGScriptPublicKey {
         };
     }
 }
+exports.XMGScriptPublicKey = XMGScriptPublicKey;
 //# sourceMappingURL=XMGScriptPublicKey.js.map

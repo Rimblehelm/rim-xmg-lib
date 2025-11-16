@@ -1,11 +1,14 @@
-import { XMGScriptPublicKey } from './XMGScriptPublicKey';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGOutput = void 0;
+const XMGScriptPublicKey_1 = require("./XMGScriptPublicKey");
 /**
  * Represents a Coin Magi (XMG) transaction output.
  *
  * Construct with raw JSON (e.g. an element from vout array) or use
  * `fromJSON` / `fromArray` helpers.
  */
-export class XMGOutput {
+class XMGOutput {
     /**
      * Create a new XMGOutput from raw IVout JSON.
      * @param output - Raw output object returned by a node or explorer.
@@ -15,7 +18,7 @@ export class XMGOutput {
     constructor(output) {
         this.Value = output.value;
         this.Index = output.n;
-        this.ScriptPublicKey = new XMGScriptPublicKey(output.scriptPubKey);
+        this.ScriptPublicKey = new XMGScriptPublicKey_1.XMGScriptPublicKey(output.scriptPubKey);
     }
     /**
      * Create an XMGOutput from raw JSON.
@@ -47,4 +50,5 @@ export class XMGOutput {
         };
     }
 }
+exports.XMGOutput = XMGOutput;
 //# sourceMappingURL=XMGOutput.js.map

@@ -7,7 +7,9 @@
 
 [![CI](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml)
 [![Docs CI](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
+[![Release](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml)
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
+[![Docs Deploy](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Coverage](https://coveralls.io/repos/github/rimblehelm/rim-xmg-lib/badge.svg?branch=main)](https://coveralls.io/github/rimblehelm/rim-xmg-lib)
 Note: Coveralls will post a comment on pull requests with a link to the coverage report.
 
@@ -148,6 +150,8 @@ After you set `NPM_TOKEN` to an Automation token, you can trigger the `Publish` 
 gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use_npm=true
 ```
 
+Note: the repository now triggers package publishes once a GitHub Release is created. The `Publish` workflow is triggered on `release: published` and is protected by the `release` environment (requires reviewers) so the release package step will pause for approval before publishing. If you want to publish by hand instead, the `Publish` workflow remains callable from the Actions UI (`workflow_dispatch`).
+
 You can also validate your token locally with the included `npm` script:
 
 ```bash
@@ -177,6 +181,23 @@ Example (PowerShell):
 
 The script will create the environment and add a protection rule requiring reviews from the specified users or teams. Use this if you want a human to approve the release job before GitHub Actions publishes the package.
 
+Notes & troubleshooting for reviewers:
+- Reviewer entries must be valid GitHub usernames or an `org/team-slug` (e.g., `myorg/docs-team`). If a user or team is not found you'll get a 404 from the API.
+- The workflow runs with a token: prefer using the `ADMIN_GITHUB_TOKEN` repository secret (a PAT) with `repo` and `admin:org` scopes when creating reviewers for org teams.
+- If the script cannot add reviewers automatically it will still create the environment; you will then need to add the reviewer(s) manually via Settings → Environments → <env> → Protection rules.
+
+Create `docs` environment for docs deploy
+---------------------------------------
+
+Create a `docs` environment to protect automated Docs deployment (the `deploy-pages` job is now gated by this environment).
+Use the same GH CLI script provided earlier to create the docs environment and require reviewers:
+
+```bash
+./scripts/create-environment.sh docs docs-team,docs-manager
+```
+
+This will create the `docs` environment; when the `deploy-pages` job runs, it will pause and require approval if you set that in the environment's protection rules.
+
 GitHub Actions — create environment workflow
 --------------------------------------------
 
@@ -191,6 +212,23 @@ gh workflow run "Create Release Environment" --repo rimblehelm/rim-xmg-lib --ref
 - Required permissions: the `GITHUB_TOKEN` used by workflow must belong to a user with permissions to manage environments and protection rules, so you must either:
 	- Run the workflow manually from an admin account, or
 	- Run the `scripts/create-environment.sh` / `scripts/create-environment.ps1` locally under a user with admin rights.
+
+If you'd like the workflow to be run by Automation (e.g., on repository creation), create a repository secret named `ADMIN_GITHUB_TOKEN` containing a personal access token (PAT) with adequate permissions. This PAT must be created by an account that has admin access to the repository.
+
+How to create the PAT and secret:
+- Generate a Personal Access Token (classic) with the `repo` scope (and `admin:org` if you plan to add org teams as reviewers) at https://github.com/settings/tokens
+- On the repository settings, go to `Settings -> Secrets and variables -> Actions -> New repository secret` and add the token as `ADMIN_GITHUB_TOKEN`.
+
+When `ADMIN_GITHUB_TOKEN` is present the `Create Release Environment` and `Auto-create Release Environment` workflows will use it to create environments and add protection rules automatically; otherwise the workflows fallback to the default `GITHUB_TOKEN` (which often lacks admin rights and can produce a 403 error).
+
+How to check token scopes from your shell (optional):
+
+```bash
+# Replace <PAT> with your personal access token
+curl -I -H "Authorization: token <PAT>" https://api.github.com/user | grep -i x-oauth-scopes
+```
+
+The output will show the scopes attached to the token. You need at least `repo` for repository-level actions; add `admin:org` if you're adding reviewers from organization teams.
 
 - The workflow itself sets up the environment and creates a protection rule that requires at least 1 approving reviewer from the list you provide. After the environment exists, the `release.yml` workflow will pause at the environment approval step and require a reviewer to approve.
 

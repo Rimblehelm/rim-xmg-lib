@@ -6,7 +6,7 @@
 
 # Interface: IXMGWallet
 
-Defined in: [src/XMGWallet.ts:3](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L3)
+Defined in: [src/XMGWallet.ts:3](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L3)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/XMGWallet.ts:3](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **address**: `string`
 
-Defined in: [src/XMGWallet.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L4)
+Defined in: [src/XMGWallet.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L4)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/XMGWallet.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **createdAt**: `Date`
 
-Defined in: [src/XMGWallet.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L6)
+Defined in: [src/XMGWallet.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L6)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/XMGWallet.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `optional` **label**: `string`
 
-Defined in: [src/XMGWallet.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L5)
+Defined in: [src/XMGWallet.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L5)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [src/XMGWallet.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **transactions**: [`IXMGTransaction`](IXMGTransaction.md)[]
 
-Defined in: [src/XMGWallet.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L7)
+Defined in: [src/XMGWallet.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L7)

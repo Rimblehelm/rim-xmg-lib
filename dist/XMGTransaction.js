@@ -1,4 +1,7 @@
-import { XMGOutput } from './XMGOutput';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGTransaction = void 0;
+const XMGOutput_1 = require("./XMGOutput");
 /**
  * XMGTransaction - lightweight TypeScript model for Magi (XMG) transactions.
  * Parsers are defensive and will coerce/normalize common shapes found in examples.
@@ -10,7 +13,7 @@ import { XMGOutput } from './XMGOutput';
  * RPC/node explorers and exposes convenience helpers for serialization and
  * basic analysis.
  */
-export class XMGTransaction {
+class XMGTransaction {
     /**
     * Create a new XMGTransaction.
      * @param obj - Raw transaction object matching `IXMGTransaction`.
@@ -97,7 +100,7 @@ export class XMGTransaction {
             type: (_f = v.scriptPubKey) === null || _f === void 0 ? void 0 : _f.type,
             addresses: Array.isArray((_g = v.scriptPubKey) === null || _g === void 0 ? void 0 : _g.addresses) ? v.scriptPubKey.addresses.slice() : undefined,
         };
-        return new XMGOutput({
+        return new XMGOutput_1.XMGOutput({
             value: typeof v.value === 'number' ? v.value : Number(v.value) || 0,
             n: Number(v.n) || 0,
             scriptPubKey: script,
@@ -156,4 +159,5 @@ export class XMGTransaction {
         return this.Outputs.reduce((s, o) => s + Number(o.Value || 0), 0);
     }
 }
+exports.XMGTransaction = XMGTransaction;
 //# sourceMappingURL=XMGTransaction.js.map

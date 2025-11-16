@@ -1,11 +1,14 @@
-import { XMGTransaction } from "./XMGTransaction";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGWallet = void 0;
+const XMGTransaction_1 = require("./XMGTransaction");
 /**
  * Represents a simple wallet object containing transactions and an address.
  *
  * This is a convenience wrapper for showing balances and transaction counts
  * for a single address; transactions are returned as `XMGTransaction` instances.
  */
-export class XMGWallet {
+class XMGWallet {
     /**
      * Create a wallet from raw data.
      * @param data - Wallet data matching `IXMGWallet`.
@@ -16,7 +19,7 @@ export class XMGWallet {
         this.address = data.address;
         this.label = data.label;
         this.createdAt = data.createdAt;
-        this.transactions = data.transactions.map(tx => new XMGTransaction(tx));
+        this.transactions = data.transactions.map(tx => new XMGTransaction_1.XMGTransaction(tx));
     }
     /**
      * Returns the number of transactions associated with the wallet.
@@ -52,4 +55,5 @@ export class XMGWallet {
         }, 0);
     }
 }
+exports.XMGWallet = XMGWallet;
 //# sourceMappingURL=XMGWallet.js.map

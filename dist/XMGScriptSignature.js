@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGScriptSignature = void 0;
 /**
  * Represents a Coin Magi (XMG) script signature.
  * Construct with raw JSON (e.g. scriptSig element) or use fromJSON/fromArray helpers.
@@ -8,7 +11,7 @@
  * Contains the script assembly and hexadecimal representation used inside a
  * transaction's input `scriptSig`.
  */
-export class XMGScriptSignature {
+class XMGScriptSignature {
     /**
      * Construct a new XMGScriptSignature from raw scriptSig JSON.
      * @param obj - Raw `IScriptSig` value.
@@ -48,4 +51,5 @@ export class XMGScriptSignature {
         };
     }
 }
+exports.XMGScriptSignature = XMGScriptSignature;
 //# sourceMappingURL=XMGScriptSignature.js.map

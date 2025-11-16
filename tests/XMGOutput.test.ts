@@ -19,4 +19,16 @@ describe('XMGOutput', () => {
     expect(json.n).toBe(out.Index);
     expect(json.scriptPubKey?.type).toBe(out.ScriptPublicKey.Type);
   });
+
+  it('fromJSON creates XMGOutput from raw object', () => {
+    const output = XMGOutput.fromJSON(sample as any);
+    expect(output.Value).toBe(sample.value);
+    expect(output.Index).toBe(sample.n);
+    expect(output.ScriptPublicKey.Type).toBe(sample.scriptPubKey.type);
+  });
+
+  it('fromArray handles non-array input', () => {
+    const result = XMGOutput.fromArray('not-an-array' as any);
+    expect(result).toEqual([]);
+  });
 });

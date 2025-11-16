@@ -10,4 +10,9 @@ describe('XMGScriptSignature', () => {
     expect(sig.Hexadecimal).toBe(raw.hex);
     expect(sig.toJSON()).toEqual(raw);
   });
+
+  it('fromArray handles non-array input', () => {
+    const result = XMGScriptSignature.fromArray('not-an-array' as any);
+    expect(result).toEqual([]);
+  });
 });

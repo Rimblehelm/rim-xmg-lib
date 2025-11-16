@@ -13,4 +13,16 @@ describe('XMGScriptPublicKey', () => {
     expect(pk.Addresses).toEqual(raw.addresses);
     expect(pk.toJSON()).toEqual({ asm: pk.Assembly, hex: pk.Hexadecimal, reqSigs: pk.RequiredSignatures || undefined, type: pk.Type, addresses: pk.Addresses || undefined });
   });
+
+  it('fromJSON creates XMGScriptPublicKey from raw object', () => {
+    const raw = { asm: 'OP_DUP', hex: 'cafe', type: 'scripthash', addresses: ['Xx222'] };
+    const pk = XMGScriptPublicKey.fromJSON(raw as any);
+    expect(pk.Assembly).toBe(raw.asm);
+    expect(pk.Type).toBe(raw.type);
+  });
+
+  it('fromArray handles non-array input', () => {
+    const result = XMGScriptPublicKey.fromArray('not-an-array' as any);
+    expect(result).toEqual([]);
+  });
 });

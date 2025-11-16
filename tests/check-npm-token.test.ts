@@ -26,4 +26,21 @@ describe('check-npm-token', () => {
   it('returns false for invalid JSON string', () => {
     expect(hasAutomationToken('not-json')).toBe(false);
   });
+
+  it('returns false for null input', () => {
+    expect(hasAutomationToken(null)).toBe(false);
+  });
+
+  it('returns false for undefined input', () => {
+    expect(hasAutomationToken(undefined)).toBe(false);
+  });
+
+  it('returns false for empty object', () => {
+    expect(hasAutomationToken({})).toBe(false);
+  });
+
+  it('returns false for object with tokens but none are automation', () => {
+    const obj = { 'a': { id: 'a', type: 'publish' }, 'b': { id: 'b', type: 'read' } };
+    expect(hasAutomationToken(obj)).toBe(false);
+  });
 });

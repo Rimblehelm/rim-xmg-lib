@@ -1,4 +1,7 @@
-import { XMGScriptSignature } from './XMGScriptSignature';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XMGInput = void 0;
+const XMGScriptSignature_1 = require("./XMGScriptSignature");
 /**
  * Represents a Coin Magi (XMG) transaction input.
  * Construct with raw JSON (e.g. an element from vin array) or use fromJSON/fromArray helpers.
@@ -9,7 +12,7 @@ import { XMGScriptSignature } from './XMGScriptSignature';
  * Provides helpers for parsing raw vin JSON and for serializing back to the
  * RPC-compatible structure.
  */
-export class XMGInput {
+class XMGInput {
     /**
      * Constructs a new XMGInput from a raw `IVin` object.
      * @param input - Raw input JSON matching `IVin`.
@@ -22,7 +25,7 @@ export class XMGInput {
         this.OutputIndex = input.vout !== undefined ? input.vout : undefined;
         this.Sequence = input.sequence;
         if (input.scriptSig) {
-            this.ScriptSignature = new XMGScriptSignature(input.scriptSig);
+            this.ScriptSignature = new XMGScriptSignature_1.XMGScriptSignature(input.scriptSig);
         }
     }
     /**
@@ -72,4 +75,5 @@ export class XMGInput {
         };
     }
 }
+exports.XMGInput = XMGInput;
 //# sourceMappingURL=XMGInput.js.map

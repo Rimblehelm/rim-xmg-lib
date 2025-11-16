@@ -19,4 +19,15 @@ describe('XMGInput', () => {
     expect(i.OutputIndex).toBe(txRaw.vout);
     expect(i.toJSON().txid).toBe(txRaw.txid);
   });
+
+  it('fromJSON creates XMGInput from raw object', () => {
+    const input = XMGInput.fromJSON(txRaw as any);
+    expect(input.isTransaction).toBe(true);
+    expect(input.TransactionID).toBe(txRaw.txid);
+  });
+
+  it('fromArray handles non-array input', () => {
+    const result = XMGInput.fromArray('not-an-array' as any);
+    expect(result).toEqual([]);
+  });
 });

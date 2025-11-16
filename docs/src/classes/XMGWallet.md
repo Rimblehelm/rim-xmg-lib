@@ -6,7 +6,7 @@
 
 # Class: XMGWallet
 
-Defined in: [src/XMGWallet.ts:16](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L16)
+Defined in: [src/XMGWallet.ts:16](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L16)
 
 Represents a simple wallet object containing transactions and an address.
 
@@ -19,7 +19,7 @@ for a single address; transactions are returned as `XMGTransaction` instances.
 
 > **new XMGWallet**(`data`): `XMGWallet`
 
-Defined in: [src/XMGWallet.ts:28](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L28)
+Defined in: [src/XMGWallet.ts:28](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L28)
 
 Create a wallet from raw data.
 
@@ -47,7 +47,7 @@ const w = new XMGWallet({ address: 'Xx...', createdAt: new Date(), transactions:
 
 > **address**: `string`
 
-Defined in: [src/XMGWallet.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L17)
+Defined in: [src/XMGWallet.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L17)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/XMGWallet.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **createdAt**: `Date`
 
-Defined in: [src/XMGWallet.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L19)
+Defined in: [src/XMGWallet.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L19)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [src/XMGWallet.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > `optional` **label**: `string`
 
-Defined in: [src/XMGWallet.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L18)
+Defined in: [src/XMGWallet.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L18)
 
 ***
 
@@ -71,7 +71,7 @@ Defined in: [src/XMGWallet.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **transactions**: [`XMGTransaction`](XMGTransaction.md)[]
 
-Defined in: [src/XMGWallet.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L20)
+Defined in: [src/XMGWallet.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L20)
 
 ## Accessors
 
@@ -81,7 +81,7 @@ Defined in: [src/XMGWallet.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **get** **balance**(): `number`
 
-Defined in: [src/XMGWallet.ts:50](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L50)
+Defined in: [src/XMGWallet.ts:50](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L50)
 
 Computes a simple balance for the wallet by summing incoming and
 subtracting outgoing amounts based on transaction outputs and inputs.
@@ -104,7 +104,7 @@ Calculated balance for the wallet address (number).
 
 > **get** **transactionCount**(): `number`
 
-Defined in: [src/XMGWallet.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGWallet.ts#L39)
+Defined in: [src/XMGWallet.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGWallet.ts#L39)
 
 Returns the number of transactions associated with the wallet.
 

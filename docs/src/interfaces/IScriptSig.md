@@ -6,7 +6,7 @@
 
 # Interface: IScriptSig
 
-Defined in: [src/XMGScriptSignature.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptSignature.ts#L4)
+Defined in: [src/XMGScriptSignature.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L4)
 
 Interface representing the raw JSON structure of a Coin Magi (XMG) script signature.
 
@@ -16,7 +16,7 @@ Interface representing the raw JSON structure of a Coin Magi (XMG) script signat
 
 > **asm**: `string`
 
-Defined in: [src/XMGScriptSignature.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptSignature.ts#L5)
+Defined in: [src/XMGScriptSignature.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L5)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/XMGScriptSignature.ts:5](https://github.com/Rimblehelm/rim-xmg-
 
 > **hex**: `string`
 
-Defined in: [src/XMGScriptSignature.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptSignature.ts#L6)
+Defined in: [src/XMGScriptSignature.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L6)
