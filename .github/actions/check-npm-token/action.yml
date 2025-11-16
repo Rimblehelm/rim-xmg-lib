@@ -19,7 +19,10 @@ runs:
         if [ -n "${{ inputs.npm-token }}" ]; then
           export NPM_TOKEN="${{ inputs.npm-token }}"
         fi
-        RESULT=$(node ./scripts/check-npm-token-cli.js 2>&1 | grep -v "SECURITY NOTICE" | grep -v "npm notice" || echo "NPM_TOKEN check failed")
+        RESULT=$(node ./scripts/check-npm-token-cli.js 2>&1 | { grep -v "SECURITY NOTICE" || true; } | { grep -v "npm notice" || true; } | head -1)
+        if [ -z "$RESULT" ]; then
+          RESULT="NPM_TOKEN check completed"
+        fi
         echo "result=$RESULT" >> $GITHUB_OUTPUT
         if [ -n "$NPM_TOKEN" ]; then
           echo "token_available=true" >> $GITHUB_OUTPUT
