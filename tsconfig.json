@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "Node16",
+    "module": "NodeNext",
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
@@ -9,7 +9,7 @@
     "strict": true,
     "types": ["node", "vitest"],
     "esModuleInterop": true,
-    "moduleResolution": "node16",
+    "moduleResolution": "NodeNext",
     "sourceMap": true
   },
   "include": ["src"]
