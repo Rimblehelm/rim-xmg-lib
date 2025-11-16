@@ -69,9 +69,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           TAG="${GITHUB_REF##*/}"
-          # Explicitly write updated changelog to the 'main' branch
-          DEFAULT_BRANCH="main"
-          echo "Writing changelog to default branch: $DEFAULT_BRANCH"
+          # Prefer `main` if it exists; otherwise fall back to repository default
+          if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
+            DEFAULT_BRANCH="main"
+            echo "Detected 'main' branch, writing changelog to: $DEFAULT_BRANCH"
+          else
+            DEFAULT_BRANCH=$(git rev-parse --abbrev-ref origin/HEAD 2>/dev/null | sed 's@origin/@@')
+            if [ -z "$DEFAULT_BRANCH" ]; then DEFAULT_BRANCH="master"; fi
+            echo "'main' not present; falling back to detected default branch: $DEFAULT_BRANCH"
+          fi
           git checkout $DEFAULT_BRANCH || git checkout -b $DEFAULT_BRANCH
           git pull origin $DEFAULT_BRANCH || true
           if git diff --quiet -- CHANGELOG.md; then
