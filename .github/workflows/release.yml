@@ -59,6 +59,18 @@ jobs:
           else
             echo "body=Release $TAG" >> $GITHUB_OUTPUT
           fi
+
+      - name: Show release notes in logs (optional)
+        if: always()
+        run: |
+          echo "---- Release notes for ${GITHUB_REF##*/} ----"
+          cat release-notes.md || echo "(no release-notes.md generated)"
+
+      - name: Upload release notes artifact (for manual review)
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.md
       - name: Run prepublish (lint/typecheck/test/build)
         run: npm run prepublishOnly
 
