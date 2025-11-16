@@ -6,7 +6,7 @@
 
 # Class: XMGScriptPublicKey
 
-Defined in: [src/XMGScriptPublicKey.ts:22](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L22)
+Defined in: [src/XMGScriptPublicKey.ts:22](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L22)
 
 Model for the script public key portion of an XMG transaction output.
 
@@ -19,7 +19,7 @@ normalizes the common fields and exposes a `toJSON` helper.
 
 > **new XMGScriptPublicKey**(`scriptPubKey`): `XMGScriptPublicKey`
 
-Defined in: [src/XMGScriptPublicKey.ts:35](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L35)
+Defined in: [src/XMGScriptPublicKey.ts:35](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L35)
 
 Initialize a new `XMGScriptPublicKey` from raw JSON
 
@@ -47,7 +47,7 @@ const pk = new XMGScriptPublicKey({ asm: 'OP_DUP', hex: '...', type: 'pubkeyhash
 
 > `optional` **Addresses**: `string`[]
 
-Defined in: [src/XMGScriptPublicKey.ts:27](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L27)
+Defined in: [src/XMGScriptPublicKey.ts:27](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L27)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/XMGScriptPublicKey.ts:27](https://github.com/Rimblehelm/rim-xmg
 
 > **Assembly**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:23](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L23)
+Defined in: [src/XMGScriptPublicKey.ts:23](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L23)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [src/XMGScriptPublicKey.ts:23](https://github.com/Rimblehelm/rim-xmg
 
 > **Hexadecimal**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:24](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L24)
+Defined in: [src/XMGScriptPublicKey.ts:24](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L24)
 
 ***
 
@@ -71,7 +71,7 @@ Defined in: [src/XMGScriptPublicKey.ts:24](https://github.com/Rimblehelm/rim-xmg
 
 > `optional` **RequiredSignatures**: `number`
 
-Defined in: [src/XMGScriptPublicKey.ts:25](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L25)
+Defined in: [src/XMGScriptPublicKey.ts:25](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L25)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: [src/XMGScriptPublicKey.ts:25](https://github.com/Rimblehelm/rim-xmg
 
 > **Type**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:26](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L26)
+Defined in: [src/XMGScriptPublicKey.ts:26](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L26)
 
 ## Methods
 
@@ -87,7 +87,7 @@ Defined in: [src/XMGScriptPublicKey.ts:26](https://github.com/Rimblehelm/rim-xmg
 
 > **toJSON**(): [`IXMGScriptPubKey`](../interfaces/IXMGScriptPubKey.md)
 
-Defined in: [src/XMGScriptPublicKey.ts:66](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L66)
+Defined in: [src/XMGScriptPublicKey.ts:66](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L66)
 
 Serialize the instance into the raw JSON shape used by RPCs.
 
@@ -103,7 +103,7 @@ IXMGScriptPubKey object
 
 > `static` **fromArray**(`rawArray`): `XMGScriptPublicKey`[]
 
-Defined in: [src/XMGScriptPublicKey.ts:56](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L56)
+Defined in: [src/XMGScriptPublicKey.ts:56](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L56)
 
 Convert an array of raw scriptPubKey objects into model instances.
 
@@ -127,7 +127,7 @@ Array of `XMGScriptPublicKey`.
 
 > `static` **fromJSON**(`raw`): `XMGScriptPublicKey`
 
-Defined in: [src/XMGScriptPublicKey.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L48)
+Defined in: [src/XMGScriptPublicKey.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L48)
 
 Create an `XMGScriptPublicKey` from raw JSON.
 

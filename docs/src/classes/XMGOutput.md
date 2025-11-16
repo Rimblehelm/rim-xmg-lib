@@ -6,7 +6,7 @@
 
 # Class: XMGOutput
 
-Defined in: [src/XMGOutput.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L18)
+Defined in: [src/XMGOutput.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L18)
 
 Represents a Coin Magi (XMG) transaction output.
 
@@ -19,7 +19,7 @@ Construct with raw JSON (e.g. an element from vout array) or use
 
 > **new XMGOutput**(`output`): `XMGOutput`
 
-Defined in: [src/XMGOutput.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L29)
+Defined in: [src/XMGOutput.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L29)
 
 Create a new XMGOutput from raw IVout JSON.
 
@@ -47,7 +47,7 @@ const out = XMGOutput.fromJSON({ value: 2.5, n: 0, scriptPubKey: { asm: '...', h
 
 > **Index**: `number`
 
-Defined in: [src/XMGOutput.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L20)
+Defined in: [src/XMGOutput.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L20)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/XMGOutput.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **ScriptPublicKey**: [`XMGScriptPublicKey`](XMGScriptPublicKey.md)
 
-Defined in: [src/XMGOutput.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L21)
+Defined in: [src/XMGOutput.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L21)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [src/XMGOutput.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **Value**: `number`
 
-Defined in: [src/XMGOutput.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L19)
+Defined in: [src/XMGOutput.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L19)
 
 ## Methods
 
@@ -71,7 +71,7 @@ Defined in: [src/XMGOutput.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob
 
 > **toJSON**(): [`IVout`](../interfaces/IVout.md)
 
-Defined in: [src/XMGOutput.ts:58](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L58)
+Defined in: [src/XMGOutput.ts:58](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L58)
 
 Serialize the instance back to JSON that matches `IVout`.
 
@@ -87,7 +87,7 @@ JSON-compatible `IVout` object.
 
 > `static` **fromArray**(`rawArray`): `XMGOutput`[]
 
-Defined in: [src/XMGOutput.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L48)
+Defined in: [src/XMGOutput.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L48)
 
 Convert an array of `IVout` into an array of `XMGOutput` instances.
 
@@ -111,7 +111,7 @@ An array of `XMGOutput` instances, or empty array.
 
 > `static` **fromJSON**(`raw`): `XMGOutput`
 
-Defined in: [src/XMGOutput.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGOutput.ts#L40)
+Defined in: [src/XMGOutput.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGOutput.ts#L40)
 
 Create an XMGOutput from raw JSON.
 

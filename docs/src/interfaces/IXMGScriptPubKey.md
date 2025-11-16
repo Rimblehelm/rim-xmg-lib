@@ -6,7 +6,7 @@
 
 # Interface: IXMGScriptPubKey
 
-Defined in: [src/XMGScriptPublicKey.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L4)
+Defined in: [src/XMGScriptPublicKey.ts:4](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L4)
 
 Interface representing the raw JSON structure of a Coin Magi (XMG) script public key.
 
@@ -16,7 +16,7 @@ Interface representing the raw JSON structure of a Coin Magi (XMG) script public
 
 > `optional` **addresses**: `string`[]
 
-Defined in: [src/XMGScriptPublicKey.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L9)
+Defined in: [src/XMGScriptPublicKey.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L9)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/XMGScriptPublicKey.ts:9](https://github.com/Rimblehelm/rim-xmg-
 
 > **asm**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L5)
+Defined in: [src/XMGScriptPublicKey.ts:5](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L5)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/XMGScriptPublicKey.ts:5](https://github.com/Rimblehelm/rim-xmg-
 
 > **hex**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L6)
+Defined in: [src/XMGScriptPublicKey.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L6)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/XMGScriptPublicKey.ts:6](https://github.com/Rimblehelm/rim-xmg-
 
 > `optional` **reqSigs**: `number`
 
-Defined in: [src/XMGScriptPublicKey.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L7)
+Defined in: [src/XMGScriptPublicKey.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L7)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/XMGScriptPublicKey.ts:7](https://github.com/Rimblehelm/rim-xmg-
 
 > **type**: `string`
 
-Defined in: [src/XMGScriptPublicKey.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGScriptPublicKey.ts#L8)
+Defined in: [src/XMGScriptPublicKey.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGScriptPublicKey.ts#L8)

@@ -6,7 +6,7 @@
 
 # Class: XMGBlock
 
-Defined in: [src/XMGBlock.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L37)
+Defined in: [src/XMGBlock.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L37)
 
 Lightweight model for a Magi (XMG) block as returned by XMG RPCs.
 
@@ -19,7 +19,7 @@ and exposes convenience getters for commonly useful checks.
 
 > **new XMGBlock**(`data`): `XMGBlock`
 
-Defined in: [src/XMGBlock.ts:65](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L65)
+Defined in: [src/XMGBlock.ts:65](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L65)
 
 Create a new XMGBlock instance from raw block JSON.
 
@@ -47,7 +47,7 @@ const block = new XMGBlock({ hash: 'abc', confirmations: 100, size: 1234, height
 
 > `readonly` **bits**: `string`
 
-Defined in: [src/XMGBlock.ts:47](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L47)
+Defined in: [src/XMGBlock.ts:47](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L47)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/XMGBlock.ts:47](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **confirmations**: `number`
 
-Defined in: [src/XMGBlock.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L39)
+Defined in: [src/XMGBlock.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L39)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [src/XMGBlock.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **difficulty**: `number`
 
-Defined in: [src/XMGBlock.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L48)
+Defined in: [src/XMGBlock.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L48)
 
 ***
 
@@ -71,7 +71,7 @@ Defined in: [src/XMGBlock.ts:48](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **entropyBit**: `boolean`
 
-Defined in: [src/XMGBlock.ts:53](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L53)
+Defined in: [src/XMGBlock.ts:53](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L53)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: [src/XMGBlock.ts:53](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **flags**: `string`
 
-Defined in: [src/XMGBlock.ts:51](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L51)
+Defined in: [src/XMGBlock.ts:51](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L51)
 
 ***
 
@@ -87,7 +87,7 @@ Defined in: [src/XMGBlock.ts:51](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **hash**: `string`
 
-Defined in: [src/XMGBlock.ts:38](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L38)
+Defined in: [src/XMGBlock.ts:38](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L38)
 
 ***
 
@@ -95,7 +95,7 @@ Defined in: [src/XMGBlock.ts:38](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **height**: `number`
 
-Defined in: [src/XMGBlock.ts:41](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L41)
+Defined in: [src/XMGBlock.ts:41](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L41)
 
 ***
 
@@ -103,7 +103,7 @@ Defined in: [src/XMGBlock.ts:41](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **merkleRoot**: `string`
 
-Defined in: [src/XMGBlock.ts:43](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L43)
+Defined in: [src/XMGBlock.ts:43](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L43)
 
 ***
 
@@ -111,7 +111,7 @@ Defined in: [src/XMGBlock.ts:43](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **mint**: `number`
 
-Defined in: [src/XMGBlock.ts:44](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L44)
+Defined in: [src/XMGBlock.ts:44](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L44)
 
 ***
 
@@ -119,7 +119,7 @@ Defined in: [src/XMGBlock.ts:44](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **modifier**: `string`
 
-Defined in: [src/XMGBlock.ts:54](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L54)
+Defined in: [src/XMGBlock.ts:54](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L54)
 
 ***
 
@@ -127,7 +127,7 @@ Defined in: [src/XMGBlock.ts:54](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **modifierChecksum**: `string`
 
-Defined in: [src/XMGBlock.ts:55](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L55)
+Defined in: [src/XMGBlock.ts:55](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L55)
 
 ***
 
@@ -135,7 +135,7 @@ Defined in: [src/XMGBlock.ts:55](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` `optional` **nextBlockHash**: `string`
 
-Defined in: [src/XMGBlock.ts:50](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L50)
+Defined in: [src/XMGBlock.ts:50](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L50)
 
 ***
 
@@ -143,7 +143,7 @@ Defined in: [src/XMGBlock.ts:50](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **nonce**: `number`
 
-Defined in: [src/XMGBlock.ts:46](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L46)
+Defined in: [src/XMGBlock.ts:46](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L46)
 
 ***
 
@@ -151,7 +151,7 @@ Defined in: [src/XMGBlock.ts:46](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` `optional` **previousBlockHash**: `string`
 
-Defined in: [src/XMGBlock.ts:49](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L49)
+Defined in: [src/XMGBlock.ts:49](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L49)
 
 ***
 
@@ -159,7 +159,7 @@ Defined in: [src/XMGBlock.ts:49](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **proofHash**: `string`
 
-Defined in: [src/XMGBlock.ts:52](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L52)
+Defined in: [src/XMGBlock.ts:52](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L52)
 
 ***
 
@@ -167,7 +167,7 @@ Defined in: [src/XMGBlock.ts:52](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **signature**: `string`
 
-Defined in: [src/XMGBlock.ts:57](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L57)
+Defined in: [src/XMGBlock.ts:57](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L57)
 
 ***
 
@@ -175,7 +175,7 @@ Defined in: [src/XMGBlock.ts:57](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **size**: `number`
 
-Defined in: [src/XMGBlock.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L40)
+Defined in: [src/XMGBlock.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L40)
 
 ***
 
@@ -183,7 +183,7 @@ Defined in: [src/XMGBlock.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **time**: `Date`
 
-Defined in: [src/XMGBlock.ts:45](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L45)
+Defined in: [src/XMGBlock.ts:45](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L45)
 
 ***
 
@@ -191,7 +191,7 @@ Defined in: [src/XMGBlock.ts:45](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **transactions**: `string`[]
 
-Defined in: [src/XMGBlock.ts:56](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L56)
+Defined in: [src/XMGBlock.ts:56](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L56)
 
 ***
 
@@ -199,7 +199,7 @@ Defined in: [src/XMGBlock.ts:56](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `readonly` **version**: `number`
 
-Defined in: [src/XMGBlock.ts:42](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L42)
+Defined in: [src/XMGBlock.ts:42](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L42)
 
 ## Accessors
 
@@ -209,7 +209,7 @@ Defined in: [src/XMGBlock.ts:42](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **get** **hasStakeModifier**(): `boolean`
 
-Defined in: [src/XMGBlock.ts:144](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L144)
+Defined in: [src/XMGBlock.ts:144](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L144)
 
 True when the block flags contain a stake-modifier marker.
 
@@ -227,7 +227,7 @@ true when the stake modifier flag appears in flags string.
 
 > **get** **isGenesis**(): `boolean`
 
-Defined in: [src/XMGBlock.ts:151](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L151)
+Defined in: [src/XMGBlock.ts:151](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L151)
 
 True if this block is the genesis block (height === 0).
 
@@ -245,7 +245,7 @@ true when this block's height equals zero.
 
 > **get** **isProofOfStake**(): `boolean`
 
-Defined in: [src/XMGBlock.ts:158](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L158)
+Defined in: [src/XMGBlock.ts:158](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L158)
 
 True when the block flags indicate Proof-of-Stake.
 
@@ -263,7 +263,7 @@ true when flags indicate 'proof-of-stake'.
 
 > **get** **isProofOfWork**(): `boolean`
 
-Defined in: [src/XMGBlock.ts:165](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L165)
+Defined in: [src/XMGBlock.ts:165](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L165)
 
 True when the block flags indicate Proof-of-Work.
 
@@ -281,7 +281,7 @@ true when flags indicate 'proof-of-work'.
 
 > **get** **txCount**(): `number`
 
-Defined in: [src/XMGBlock.ts:172](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L172)
+Defined in: [src/XMGBlock.ts:172](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L172)
 
 Number of transactions in the block.
 
@@ -297,7 +297,7 @@ Count of transactions in the block.
 
 > **toJSON**(): [`IXMGBlock`](../interfaces/IXMGBlock.md)
 
-Defined in: [src/XMGBlock.ts:113](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L113)
+Defined in: [src/XMGBlock.ts:113](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L113)
 
 Serialize this block back to RPC-like JSON.
 
@@ -313,7 +313,7 @@ Serialize this block back to RPC-like JSON.
 
 > `static` **fromArray**(`rawArray`): `XMGBlock`[]
 
-Defined in: [src/XMGBlock.ts:104](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L104)
+Defined in: [src/XMGBlock.ts:104](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L104)
 
 Convert an array of raw block objects into `XMGBlock` instances.
 
@@ -337,7 +337,7 @@ Array of `XMGBlock` objects.
 
 > `static` **fromJSON**(`raw`): `XMGBlock`
 
-Defined in: [src/XMGBlock.ts:96](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGBlock.ts#L96)
+Defined in: [src/XMGBlock.ts:96](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGBlock.ts#L96)
 
 Create a XMGBlock from raw JSON data.
 

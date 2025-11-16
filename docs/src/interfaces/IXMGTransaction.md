@@ -6,7 +6,7 @@
 
 # Interface: IXMGTransaction
 
-Defined in: [src/XMGTransaction.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L9)
+Defined in: [src/XMGTransaction.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L9)
 
 Interface representing the raw JSON structure of a Coin Magi (XMG) transaction.
 
@@ -16,7 +16,7 @@ Interface representing the raw JSON structure of a Coin Magi (XMG) transaction.
 
 > `optional` **blockhash**: `string`
 
-Defined in: [src/XMGTransaction.ts:16](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L16)
+Defined in: [src/XMGTransaction.ts:16](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/XMGTransaction.ts:16](https://github.com/Rimblehelm/rim-xmg-lib
 
 > `optional` **confirmations**: `number`
 
-Defined in: [src/XMGTransaction.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L17)
+Defined in: [src/XMGTransaction.ts:17](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L17)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/XMGTransaction.ts:17](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **locktime**: `number`
 
-Defined in: [src/XMGTransaction.ts:13](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L13)
+Defined in: [src/XMGTransaction.ts:13](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L13)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/XMGTransaction.ts:13](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **time**: `number`
 
-Defined in: [src/XMGTransaction.ts:12](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L12)
+Defined in: [src/XMGTransaction.ts:12](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L12)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/XMGTransaction.ts:12](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **txid**: `string`
 
-Defined in: [src/XMGTransaction.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L10)
+Defined in: [src/XMGTransaction.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L10)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/XMGTransaction.ts:10](https://github.com/Rimblehelm/rim-xmg-lib
 
 > `optional` **txntime**: `number`
 
-Defined in: [src/XMGTransaction.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L18)
+Defined in: [src/XMGTransaction.ts:18](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L18)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/XMGTransaction.ts:18](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **version**: `number`
 
-Defined in: [src/XMGTransaction.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L11)
+Defined in: [src/XMGTransaction.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L11)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/XMGTransaction.ts:11](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **vin**: [`IVin`](IVin.md)[]
 
-Defined in: [src/XMGTransaction.ts:14](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L14)
+Defined in: [src/XMGTransaction.ts:14](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L14)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [src/XMGTransaction.ts:14](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **vout**: [`IVout`](IVout.md)[]
 
-Defined in: [src/XMGTransaction.ts:15](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGTransaction.ts#L15)
+Defined in: [src/XMGTransaction.ts:15](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGTransaction.ts#L15)

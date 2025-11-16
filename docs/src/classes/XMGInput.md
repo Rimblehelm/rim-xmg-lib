@@ -6,7 +6,7 @@
 
 # Class: XMGInput
 
-Defined in: [src/XMGInput.ts:24](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L24)
+Defined in: [src/XMGInput.ts:24](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L24)
 
 Represents a Coin Magi (XMG) transaction input.
 
@@ -19,7 +19,7 @@ RPC-compatible structure.
 
 > **new XMGInput**(`input`): `XMGInput`
 
-Defined in: [src/XMGInput.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L37)
+Defined in: [src/XMGInput.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L37)
 
 Constructs a new XMGInput from a raw `IVin` object.
 
@@ -48,7 +48,7 @@ Raw input JSON matching `IVin`.
 
 > `optional` **Coinbase**: `string`
 
-Defined in: [src/XMGInput.ts:25](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L25)
+Defined in: [src/XMGInput.ts:25](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L25)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/XMGInput.ts:25](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `optional` **OutputIndex**: `number`
 
-Defined in: [src/XMGInput.ts:27](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L27)
+Defined in: [src/XMGInput.ts:27](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L27)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/XMGInput.ts:27](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `optional` **ScriptSignature**: [`XMGScriptSignature`](XMGScriptSignature.md)
 
-Defined in: [src/XMGInput.ts:28](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L28)
+Defined in: [src/XMGInput.ts:28](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L28)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/XMGInput.ts:28](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **Sequence**: `number`
 
-Defined in: [src/XMGInput.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L29)
+Defined in: [src/XMGInput.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L29)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/XMGInput.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `optional` **TransactionID**: `string`
 
-Defined in: [src/XMGInput.ts:26](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L26)
+Defined in: [src/XMGInput.ts:26](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L26)
 
 ## Accessors
 
@@ -90,7 +90,7 @@ Defined in: [src/XMGInput.ts:26](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **get** **isCoinbase**(): `boolean`
 
-Defined in: [src/XMGInput.ts:72](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L72)
+Defined in: [src/XMGInput.ts:72](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L72)
 
 True when this input is a coinbase (mined reward) input.
    *
@@ -109,7 +109,7 @@ True when this input is a coinbase (mined reward) input.
 
 > **get** **isTransaction**(): `boolean`
 
-Defined in: [src/XMGInput.ts:79](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L79)
+Defined in: [src/XMGInput.ts:79](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L79)
 
 True when this input references a previous transaction output.
    *
@@ -126,7 +126,7 @@ True when this input references a previous transaction output.
 
 > **toJSON**(): [`IVin`](../interfaces/IVin.md)
 
-Defined in: [src/XMGInput.ts:87](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L87)
+Defined in: [src/XMGInput.ts:87](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L87)
 
 Serialize an XMGInput back to JSON compatible with `IVin`.
 
@@ -142,7 +142,7 @@ IVin structure.
 
 > `static` **fromArray**(`rawArray`): `XMGInput`[]
 
-Defined in: [src/XMGInput.ts:62](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L62)
+Defined in: [src/XMGInput.ts:62](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L62)
 
 Map an array of raw `IVin` objects into an array of `XMGInput`.
 Safely returns an empty array if provided value is not an array.
@@ -167,7 +167,7 @@ An array of XMGInput instances.
 
 > `static` **fromJSON**(`raw`): `XMGInput`
 
-Defined in: [src/XMGInput.ts:53](https://github.com/Rimblehelm/rim-xmg-lib/blob/7d9cfa40923e323fcfc92e4b3b88d18123f2fac8/src/XMGInput.ts#L53)
+Defined in: [src/XMGInput.ts:53](https://github.com/Rimblehelm/rim-xmg-lib/blob/92afc3440416710ad3959fb47254f7f1137bdeac/src/XMGInput.ts#L53)
 
 Construct an XMGInput from raw JSON.
 
