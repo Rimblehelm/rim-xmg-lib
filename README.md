@@ -210,6 +210,15 @@ How to create the PAT and secret:
 
 When `ADMIN_GITHUB_TOKEN` is present the `Create Release Environment` and `Auto-create Release Environment` workflows will use it to create environments and add protection rules automatically; otherwise the workflows fallback to the default `GITHUB_TOKEN` (which often lacks admin rights and can produce a 403 error).
 
+How to check token scopes from your shell (optional):
+
+```bash
+# Replace <PAT> with your personal access token
+curl -I -H "Authorization: token <PAT>" https://api.github.com/user | grep -i x-oauth-scopes
+```
+
+The output will show the scopes attached to the token. You need at least `repo` for repository-level actions; add `admin:org` if you're adding reviewers from organization teams.
+
 - The workflow itself sets up the environment and creates a protection rule that requires at least 1 approving reviewer from the list you provide. After the environment exists, the `release.yml` workflow will pause at the environment approval step and require a reviewer to approve.
 
 If you prefer automated environment creation from CI (not recommended for security reasons), tell me and I can add an extra trigger to automate it on a push to `master`.
