@@ -12,10 +12,15 @@ on:
         description: 'Publish to npmjs.org instead of GitHub Packages'
         required: false
         default: 'false'
+      use_oidc:
+        description: 'When publishing to npmjs.org set to true to use Trusted Publishing (OIDC). If true, no NPM token is required (must configure Trusted Publisher on npmjs).'
+        required: false
+        default: 'true'
 
 permissions:
   contents: read
   packages: write
+  id-token: write
 
 jobs:
   publish:
@@ -35,6 +40,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Ensure npm supports Trusted Publishing (OIDC)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc == 'true' }}
+        run: |
+          echo "node: $(node --version)"
+          echo "npm: $(npm --version)"
+          # trusted publishing requires npm 11.5.1 or later
+          npm install -g npm@11.5.1
+          echo "upgraded npm: $(npm --version)"
+
       - name: Build
         run: npm run build
 
@@ -48,26 +62,34 @@ jobs:
 
           # If this workflow was manually dispatched with use_npm=true, switch to npmjs registry
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.use_npm }}" = "true" ]; then
-            if [ -z "$NPM_TOKEN" ]; then
-              echo "ERROR: NPM_TOKEN must be set to publish to npmjs.org. Add it in Settings → Secrets and variables → Actions.";
-              exit 1;
-            fi
             echo "PUBLISH_REGISTRY=https://registry.npmjs.org/" >> $GITHUB_ENV
-            echo "NODE_AUTH_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
+            if [ "${{ github.event.inputs.use_oidc }}" = "true" ]; then
+              echo "Using Trusted Publishing (OIDC) for npmjs.org — no NPM_TOKEN required (ensure Trusted Publisher on npmjs is configured)."
+            else
+              if [ -z "$NPM_TOKEN" ]; then
+                echo "ERROR: NPM_TOKEN must be set to publish to npmjs.org. Add it in Settings → Secrets and variables → Actions.";
+                exit 1;
+              fi
+              echo "NODE_AUTH_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
+            fi
           fi
 
       - name: Configure npm auth for registry
         run: |
           if [ "$PUBLISH_REGISTRY" = "https://registry.npmjs.org/" ]; then
-            echo "Configuring npm auth for npmjs.org";
-            npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN;
+            if [ "${{ github.event.inputs.use_oidc }}" = "true" ]; then
+              echo "Using Trusted Publishing (OIDC); skipping authentication token set for npmjs.org.";
+            else
+              echo "Configuring npm auth for npmjs.org";
+              npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN;
+            fi
           else
             echo "Configuring npm auth for GitHub Packages";
             npm config set //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN;
           fi
 
       - name: Check NPM token (whoami)
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' }}
         env:
           NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
           PUBLISH_REGISTRY: ${{ env.PUBLISH_REGISTRY }}
@@ -76,7 +98,7 @@ jobs:
           npm whoami --registry "$PUBLISH_REGISTRY" || (echo "ERROR: npm whoami failed — your NPM_TOKEN may be invalid or lack publish access for this package"; exit 1)
 
       - name: Verify NPM token type is Automation (CI-only)
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' && github.event.inputs.use_oidc != 'true' }}
         env:
           PUBLISH_REGISTRY: ${{ env.PUBLISH_REGISTRY }}
         run: |

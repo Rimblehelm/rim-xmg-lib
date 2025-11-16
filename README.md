@@ -87,6 +87,18 @@ gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use
 	- The new `Debug npm config and whoami` step prints the `npm` global registry and the resolved scoped registry for your package scope so you can confirm the publish target.
 	- The `Publish to npm registry (EOTP aware)` step captures `npm` logs and prints a helpful remediation message if `EOTP` (2FA) or `401`/`Unauthorized` errors occur.
 
+	Trusted publishing (OIDC)
+	-------------------------
+
+	This repo supports `Trusted publishing` (OIDC) for publishing to npmjs.org so you shouldn't need long-lived tokens in CI.
+
+	Steps to use Trusted Publishing:
+	- Create a Trusted Publisher for your package on npmjs.com and point it to your repo and the workflow filename `publish.yml`.
+	- Ensure your `Publish` workflow includes the `id-token: write` permission (the workflow in this repo sets it by default).
+	- When manually dispatching the `Publish` workflow, select `use_npm: true` and `use_oidc: true` — this will attempt to use OIDC to publish (no `NPM_TOKEN` required).
+
+	If OIDC-based trusted publishing isn't configured for your repo, the workflow will fall back to the token-based path if you supply an `NPM_TOKEN`. The workflow contains helpful diagnostics and instructions to create an Automation (or granular) token if necessary.
+
 	New in CI: we also added a step that checks your NPM token's type and fails early if the token is not an "Automation" token. This reduces confusion caused by 2FA (EOTP) tokens which cannot be used in CI.
 
 If you need help creating an npm Automation token I can add a short visual guide or a script to validate the token locally.
