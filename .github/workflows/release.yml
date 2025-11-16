@@ -14,6 +14,10 @@ on:
         description: 'If true, skip actual npm publish and perform dry-run only'
         required: false
         default: 'false'
+      requireReleaseNotes:
+          description: 'If true, fail the release if release-notes.md is empty'
+          required: false
+          default: 'true'
 
 permissions:
   contents: write
@@ -28,6 +32,7 @@ jobs:
     env:
       RELEASE_ENV: ${{ github.event.inputs.envName || 'release' }}
       DRY_RUN: ${{ github.event.inputs.dryRun || 'false' }}
+      REQUIRE_RELEASE_NOTES: ${{ github.event.inputs.requireReleaseNotes || 'true' }}
 
     steps:
       - name: Checkout repository
@@ -72,6 +77,18 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "body=Release $TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Ensure release notes exist (if required)
+        if: always()
+        run: |
+          if [ "${REQUIRE_RELEASE_NOTES}" = "true" ]; then
+            if [ ! -s release-notes.md ]; then
+              echo "Error: release-notes.md empty or missing and requireReleaseNotes=true"
+              exit 1
+            fi
+          else
+            echo "requireReleaseNotes=false, skipping check"
           fi
 
       - name: Show release notes in logs (optional)

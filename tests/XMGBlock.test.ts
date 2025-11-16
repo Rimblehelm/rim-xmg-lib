@@ -29,4 +29,39 @@ describe('XMGBlock', () => {
     expect(b.txCount).toBe(1);
     expect(b.isGenesis).toBe(false);
   });
+
+  it('throws when hash missing', () => {
+    const clone = { ...raw } as any;
+    delete clone.hash;
+    expect(() => new XMGBlock(clone)).toThrow(/missing hash/);
+  });
+
+  it('recognizes genesis, stake/poa flags and entropy', () => {
+    const data = { ...raw, height: 0, flags: 'stake-modifier proof-of-stake', entropybit: 1 } as any;
+    const b = new XMGBlock(data);
+    expect(b.isGenesis).toBe(true);
+    expect(b.hasStakeModifier).toBe(true);
+    expect(b.isProofOfStake).toBe(true);
+    expect(b.isProofOfWork).toBe(false);
+    expect(b.entropyBit).toBe(true);
+  });
+
+  it('parses previous and next block hash into fields', () => {
+    const data = { ...raw, previousblockhash: 'prev', nextblockhash: 'next' } as any;
+    const b = new XMGBlock(data);
+    expect(b.previousBlockHash).toBe('prev');
+    expect(b.nextBlockHash).toBe('next');
+  });
+
+  it('fromArray returns empty array for non-array', () => {
+    expect(XMGBlock.fromArray(null as any)).toEqual([]);
+    expect(XMGBlock.fromArray(undefined as any)).toEqual([]);
+  });
+
+  it('toJSON includes entropy bit as 1 or 0 and includes tx array', () => {
+    const b = new XMGBlock({ ...raw, entropybit: 1 } as any);
+    const j = b.toJSON();
+    expect(j.entropybit).toBe(1);
+    expect(Array.isArray(j.tx)).toBe(true);
+  });
 });
