@@ -301,6 +301,8 @@ Defined in: src/XMGBlock.ts:113
 
 Serialize this block back to RPC-like JSON.
 
+> Note: `toJSON()` returns the `time` field as Unix epoch seconds (number). Previously this returned the day-of-month divided by 1000 — this was a bug fixed in v0.0.2.
+
 #### Returns
 
 [`IXMGBlock`](../interfaces/IXMGBlock.md)
