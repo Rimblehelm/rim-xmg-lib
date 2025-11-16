@@ -1,6 +1,6 @@
 {
 	"name": "@rimblehelm/rim-xmg-lib",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "A TypeScript library for blockchain utilities related to the Coin Magi (XMG) cryptocurrency.",
 	"repository": {
 		"type": "git",

@@ -64,6 +64,42 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Extract package version
+        id: pkg_version
+        run: echo "version=$(node -p 'require("./package.json").version')" >> $GITHUB_OUTPUT
+
+      - name: Check if version already published (GitHub Packages)
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.use_npm != 'true' }}
+        env:
+          PUBLISH_REGISTRY: https://npm.pkg.github.com/
+        run: |
+          PKG_NAME=$(node -p 'require("./package.json").name')
+          VERSION=${{ steps.pkg_version.outputs.version }}
+          echo "Checking if $PKG_NAME@$VERSION exists on GitHub Packages..."
+          EXISTS=$(npm view "$PKG_NAME@$VERSION" version --registry "$PUBLISH_REGISTRY" 2>/dev/null || echo "")
+          if [ "$EXISTS" = "$VERSION" ]; then
+            echo "Version $VERSION already published to GitHub Packages."
+            echo "If you intend to publish a new build, bump the version in package.json (e.g. npm version patch) before creating a release."
+            exit 1
+          fi
+          echo "Version $VERSION not found on GitHub Packages. Proceeding."
+
+      - name: Check if version already published (npmjs.org)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        env:
+          PUBLISH_REGISTRY: https://registry.npmjs.org/
+        run: |
+          PKG_NAME=$(node -p 'require("./package.json").name')
+          VERSION=${{ steps.pkg_version.outputs.version }}
+          echo "Checking if $PKG_NAME@$VERSION exists on npmjs.org..."
+          EXISTS=$(npm view "$PKG_NAME@$VERSION" version --registry "$PUBLISH_REGISTRY" 2>/dev/null || echo "")
+          if [ "$EXISTS" = "$VERSION" ]; then
+            echo "Version $VERSION already published to npmjs.org."
+            echo "Bump the version (npm version patch/minor/major) and re-run the workflow."
+            exit 1
+          fi
+          echo "Version $VERSION not found on npmjs.org. Proceeding."
+
       - name: Determine publish registry
         run: |
           # Default to GitHub Packages token
