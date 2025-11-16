@@ -56,6 +56,16 @@ jobs:
             echo "NODE_AUTH_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
           fi
 
+      - name: Configure npm auth for registry
+        run: |
+          if [ "$PUBLISH_REGISTRY" = "https://registry.npmjs.org/" ]; then
+            echo "Configuring npm auth for npmjs.org";
+            npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN;
+          else
+            echo "Configuring npm auth for GitHub Packages";
+            npm config set //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN;
+          fi
+
       - name: Publish to npm registry
         run: npm publish --registry $PUBLISH_REGISTRY
         env:
