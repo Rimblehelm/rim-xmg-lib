@@ -9,7 +9,7 @@
     "strict": true,
     "types": ["node", "vitest"],
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "sourceMap": true
   },
   "include": ["src"]
