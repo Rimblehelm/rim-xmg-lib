@@ -15,7 +15,9 @@ $names = $Secrets.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { $_ 
 $missing = $false
 
 foreach($name in $names) {
-    if (-not $env:$name) {
+    # PowerShell dynamic environment variable access can be done using Get-Item Env:Name
+    $envValue = (Get-Item -Path "Env:$name" -ErrorAction SilentlyContinue).Value
+    if (-not $envValue) {
         Write-Host "MISSING: $name" -ForegroundColor Yellow
         $missing = $true
     } else {
