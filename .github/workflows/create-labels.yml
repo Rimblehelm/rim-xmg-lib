@@ -3,7 +3,7 @@ name: Create default labels
 on:
   workflow_dispatch: {}
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   # repository dispatch is a more widely supported manual bootstrap trigger
   # and can be invoked via the REST API. Use it as a fallback in case the
   # `repository` event (created) is not supported in the repo environment.

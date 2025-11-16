@@ -2,9 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
   # Run docs publishing after CI workflow completes successfully
   workflow_run:
     workflows: ['CI']
