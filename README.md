@@ -7,7 +7,6 @@
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
 [![Docs Deploy](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Coverage](https://coveralls.io/repos/github/rimblehelm/rim-xmg-lib/badge.svg?branch=main)](https://coveralls.io/github/rimblehelm/rim-xmg-lib)
-Note: Coveralls will post a comment on pull requests with a link to the coverage report.
 
 [![Secrets](https://img.shields.io/badge/Secrets-NPM_TOKEN%20%7C%20COVERALLS%20REPO%20TOKEN-lightgrey)](docs/SECRETS.md)
 
@@ -327,7 +326,23 @@ If your PR touches `src/` files it will be labeled `feature` by default; if it t
 
 ### Release & Changelog
 
-We use `release-drafter` to create draft releases and `auto-changelog` to maintain `CHANGELOG.md` on releases/tags. When you merge a PR into `main`, `release-drafter` will update the draft; when a release is published (or a tag `v*` is pushed), a workflow will publish the package and auto-generate `CHANGELOG.md` and commit it back.
+We use `release-drafter` to create draft releases and `auto-changelog` to maintain `CHANGELOG.md` on releases/tags. When you merge a PR into `main`, `release-drafter` updates the draft; when a release is published (or a tag `v*` is pushed), a workflow publishes the package and auto-generates `CHANGELOG.md` and commits it back.
+
+Manual dispatch behavior (Release workflow):
+- If you run `release.yml` manually (no tag ref) it now reads the current `package.json` version, resolves a tag `v<version>`, creates & pushes it if missing, then uses it for release notes.
+- If the tag already exists, the workflow reuses it and updates the GitHub Release (`allowUpdates: true`). This avoids 422 errors from attempting to recreate existing tags/releases.
+- Release notes extraction falls back to recent commits if the version header is not yet present in `CHANGELOG.md`.
+
+Recommended release flow:
+1. Bump version locally: `npm version patch` (or `minor`/`major`).
+2. Push the commit and tag: `git push && git push --tags` OR just run the Release workflow manually and let it create the tag.
+3. Approve the environment gate (if configured) for the publish workflow triggered by `release: published`.
+
+Test releases:
+- To create a test release without publishing to npmjs, dispatch `Release` with `dryRun=true` (publishing uses `publish.yml` gated by environment).
+- For a quick run, ensure `package.json` version is unique, then dispatch `Release`—it will auto-tag and prepare notes.
+
+Tag naming: Only semantic tags matching `v*.*.*` trigger the automated path. Avoid using branch names as tags; the workflow now prevents accidental use of `master`/`main` as a release tag.
 
 ---
 

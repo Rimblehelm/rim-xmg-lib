@@ -331,7 +331,23 @@ If your PR touches `src/` files it will be labeled `feature` by default; if it t
 
 ### Release & Changelog
 
-We use `release-drafter` to create draft releases and `auto-changelog` to maintain `CHANGELOG.md` on releases/tags. When you merge a PR into `main`, `release-drafter` will update the draft; when a release is published (or a tag `v*` is pushed), a workflow will publish the package and auto-generate `CHANGELOG.md` and commit it back.
+We use `release-drafter` to create draft releases and `auto-changelog` to maintain `CHANGELOG.md` on releases/tags. When you merge a PR into `main`, `release-drafter` updates the draft; when a release is published (or a tag `v*` is pushed), a workflow publishes the package and auto-generates `CHANGELOG.md` and commits it back.
+
+Manual dispatch behavior (Release workflow):
+- Manual runs of `release.yml` (without a tag ref) read the current `package.json` version, resolve `v<version>`, create & push the tag if missing, then use it for release notes.
+- Existing tags are reused and the Release is updated (`allowUpdates: true`) preventing 422 `already_exists` errors.
+- If `CHANGELOG.md` lacks the version header the workflow falls back to recent commit subjects to populate release notes.
+
+Recommended release flow:
+1. Bump version: `npm version patch` (or `minor`/`major`).
+2. Push commit and tag: `git push && git push --tags` OR dispatch `Release` and let it create the tag.
+3. Approve the environment gate for the publish workflow triggered by `release: published`.
+
+Testing:
+- Use `dryRun=true` input on manual dispatch to generate notes and tag without publishing the package.
+- Ensure each test run uses a unique version in `package.json`.
+
+Tag naming: Only tags matching `v*.*.*` trigger the automated path. Avoid using branch names; the workflow prevents accidental use of `master`/`main` as release tags.
 
 ---
 
