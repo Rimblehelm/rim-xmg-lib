@@ -13,7 +13,7 @@ function runTokenCheck() {
     fs.writeFileSync(tmpNpmrc, `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}`);
     const out = child_process.execSync('npm token list --json --registry https://registry.npmjs.org/', {
       env: { ...process.env, npm_config_userconfig: tmpNpmrc },
-      stdio: ['pipe', 'pipe', 'pipe'],
+      stdio: ['pipe', 'pipe', 'ignore'],
     });
     const tokens = JSON.parse(out.toString() || '[]');
     const hasAutomation = hasAutomationToken(tokens);

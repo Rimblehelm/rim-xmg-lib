@@ -7,6 +7,8 @@ inputs:
 outputs:
   result:
     description: 'Human-readable result of the check'
+  token_available:
+    description: 'true if NPM_TOKEN is available, false otherwise'
 
 runs:
   using: 'composite'
@@ -17,5 +19,10 @@ runs:
         if [ -n "${{ inputs.npm-token }}" ]; then
           export NPM_TOKEN="${{ inputs.npm-token }}"
         fi
-        RESULT=$(node ./scripts/check-npm-token-cli.js 2>/dev/null || echo "NPM_TOKEN check failed")
+        RESULT=$(node ./scripts/check-npm-token-cli.js 2>&1 | grep -v "SECURITY NOTICE" | grep -v "npm notice" || echo "NPM_TOKEN check failed")
         echo "result=$RESULT" >> $GITHUB_OUTPUT
+        if [ -n "$NPM_TOKEN" ]; then
+          echo "token_available=true" >> $GITHUB_OUTPUT
+        else
+          echo "token_available=false" >> $GITHUB_OUTPUT
+        fi
