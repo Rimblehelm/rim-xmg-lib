@@ -64,6 +64,14 @@ jobs:
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
 
+      - name: Debug environment creation (show API response)
+        run: |
+          set -x
+          echo "Calling GH API to create environment (debug, won't fail this step)"
+          gh api --method PUT "/repos/${{ github.repository }}/environments/${{ github.event.inputs.envName }}" -v || true
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+
       - name: Create environment and add reviewers
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
