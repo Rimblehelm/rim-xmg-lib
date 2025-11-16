@@ -1,0 +1,36 @@
+name: Create Release Environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      envName:
+        description: 'Environment name to create'
+        required: false
+        default: 'release'
+      reviewers:
+        description: 'Comma-separated list of reviewers (users or org/team slugs)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  create-environment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gh
+
+      - name: Create environment and add reviewers
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x ./scripts/create-environment.sh
+          ./scripts/create-environment.sh "${{ github.event.inputs.envName }}" "${{ github.event.inputs.reviewers }}"
