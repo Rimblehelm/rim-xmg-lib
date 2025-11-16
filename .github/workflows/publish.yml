@@ -67,6 +67,15 @@ jobs:
           fi
 
       - name: Publish to npm registry
+        # For scoped packages that use publishConfig in package.json we need to
+        # override that setting when publishing to npmjs.org. This step will
+        # set the registry in package.json to the desired registry in the
+        # manual dispatch case.
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        run: |
+          node -e "const p=require('./package.json'); p.publishConfig={registry:'https://registry.npmjs.org/'}; require('fs').writeFileSync('./package.json', JSON.stringify(p, null, 2)); console.log('publishConfig overridden to npmjs');"
+
+      - name: Publish to npm registry
         run: npm publish --registry $PUBLISH_REGISTRY
         env:
           NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
