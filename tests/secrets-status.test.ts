@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 describe('docs/SECRETS_STATUS.json validation', () => {
   it('SECRETS_STATUS.json is valid JSON and has required keys', () => {
-    const jsonPath = path.join(__dirname, '..', 'docs', 'SECRETS_STATUS.json');
+    const jsonPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs', 'SECRETS_STATUS.json');
     const src = fs.readFileSync(jsonPath, 'utf8');
     const j = JSON.parse(src);
     expect(typeof j).toBe('object');

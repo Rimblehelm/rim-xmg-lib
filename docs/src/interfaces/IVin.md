@@ -6,7 +6,7 @@
 
 # Interface: IVin
 
-Defined in: [src/XMGInput.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L6)
+Defined in: [src/XMGInput.ts:6](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L6)
 
 Interface representing the raw JSON structure of a Coin Magi (XMG) transaction input.
 
@@ -16,7 +16,7 @@ Interface representing the raw JSON structure of a Coin Magi (XMG) transaction i
 
 > `optional` **coinbase**: `string`
 
-Defined in: [src/XMGInput.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L7)
+Defined in: [src/XMGInput.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L7)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/XMGInput.ts:7](https://github.com/Rimblehelm/rim-xmg-lib/blob/3
 
 > `optional` **scriptSig**: [`IScriptSig`](IScriptSig.md)
 
-Defined in: [src/XMGInput.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L10)
+Defined in: [src/XMGInput.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L10)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/XMGInput.ts:10](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > **sequence**: `number`
 
-Defined in: [src/XMGInput.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L11)
+Defined in: [src/XMGInput.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L11)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/XMGInput.ts:11](https://github.com/Rimblehelm/rim-xmg-lib/blob/
 
 > `optional` **txid**: `string`
 
-Defined in: [src/XMGInput.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L8)
+Defined in: [src/XMGInput.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L8)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/XMGInput.ts:8](https://github.com/Rimblehelm/rim-xmg-lib/blob/3
 
 > `optional` **vout**: `number`
 
-Defined in: [src/XMGInput.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGInput.ts#L9)
+Defined in: [src/XMGInput.ts:9](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGInput.ts#L9)

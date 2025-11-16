@@ -6,7 +6,7 @@
 
 # Class: XMGTransaction
 
-Defined in: [src/XMGTransaction.ts:32](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L32)
+Defined in: [src/XMGTransaction.ts:32](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L32)
 
 Lightweight model for a Magi (XMG) transaction.
 
@@ -20,7 +20,7 @@ basic analysis.
 
 > **new XMGTransaction**(`obj`): `XMGTransaction`
 
-Defined in: [src/XMGTransaction.ts:49](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L49)
+Defined in: [src/XMGTransaction.ts:49](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L49)
 
 Create a new XMGTransaction.
  *
@@ -49,7 +49,7 @@ const tx = XMGTransaction.fromJSON('{"txid":"...","version":1,"time":1600000000,
 
 > `optional` **BlockHash**: `string`
 
-Defined in: [src/XMGTransaction.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L39)
+Defined in: [src/XMGTransaction.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L39)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: [src/XMGTransaction.ts:39](https://github.com/Rimblehelm/rim-xmg-lib
 
 > `optional` **Confirmations**: `number`
 
-Defined in: [src/XMGTransaction.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L40)
+Defined in: [src/XMGTransaction.ts:40](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L40)
 
 ***
 
@@ -65,7 +65,7 @@ Defined in: [src/XMGTransaction.ts:40](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **ID**: `string`
 
-Defined in: [src/XMGTransaction.ts:33](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L33)
+Defined in: [src/XMGTransaction.ts:33](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L33)
 
 ***
 
@@ -73,7 +73,7 @@ Defined in: [src/XMGTransaction.ts:33](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **Inputs**: [`XMGInput`](XMGInput.md)[]
 
-Defined in: [src/XMGTransaction.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L37)
+Defined in: [src/XMGTransaction.ts:37](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L37)
 
 ***
 
@@ -81,7 +81,7 @@ Defined in: [src/XMGTransaction.ts:37](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **LockTime**: `number`
 
-Defined in: [src/XMGTransaction.ts:36](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L36)
+Defined in: [src/XMGTransaction.ts:36](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L36)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [src/XMGTransaction.ts:36](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **Outputs**: [`XMGOutput`](XMGOutput.md)[]
 
-Defined in: [src/XMGTransaction.ts:38](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L38)
+Defined in: [src/XMGTransaction.ts:38](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L38)
 
 ***
 
@@ -97,7 +97,7 @@ Defined in: [src/XMGTransaction.ts:38](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **Time**: `Date`
 
-Defined in: [src/XMGTransaction.ts:35](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L35)
+Defined in: [src/XMGTransaction.ts:35](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L35)
 
 ***
 
@@ -105,7 +105,7 @@ Defined in: [src/XMGTransaction.ts:35](https://github.com/Rimblehelm/rim-xmg-lib
 
 > `optional` **TransactionTime**: `Date`
 
-Defined in: [src/XMGTransaction.ts:41](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L41)
+Defined in: [src/XMGTransaction.ts:41](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L41)
 
 ***
 
@@ -113,7 +113,7 @@ Defined in: [src/XMGTransaction.ts:41](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **Version**: `number`
 
-Defined in: [src/XMGTransaction.ts:34](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L34)
+Defined in: [src/XMGTransaction.ts:34](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L34)
 
 ## Methods
 
@@ -121,7 +121,7 @@ Defined in: [src/XMGTransaction.ts:34](https://github.com/Rimblehelm/rim-xmg-lib
 
 > **outputsByIndex**(`index`): [`XMGOutput`](XMGOutput.md)[]
 
-Defined in: [src/XMGTransaction.ts:142](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L142)
+Defined in: [src/XMGTransaction.ts:142](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L142)
 
 Get outputs that match the provided index (n).
 
@@ -145,7 +145,7 @@ Array of `XMGOutput` entries with a matching `Index`.
 
 > **outputsByType**(`type`): [`XMGOutput`](XMGOutput.md)[]
 
-Defined in: [src/XMGTransaction.ts:150](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L150)
+Defined in: [src/XMGTransaction.ts:150](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L150)
 
 Get outputs filtered by script public key type (e.g. 'pubkeyhash').
 
@@ -169,7 +169,7 @@ Array of `XMGOutput` where `ScriptPublicKey.Type === type`.
 
 > **toJSON**(): [`IXMGTransaction`](../interfaces/IXMGTransaction.md)
 
-Defined in: [src/XMGTransaction.ts:159](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L159)
+Defined in: [src/XMGTransaction.ts:159](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L159)
 
 Convert this transaction into a JSON-safe object following the
 `IXMGTransaction` interface. This method is primarily intended to
@@ -187,7 +187,7 @@ A JSON-serializable `IXMGTransaction` object.
 
 > **totalOutputValue**(): `number`
 
-Defined in: [src/XMGTransaction.ts:185](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L185)
+Defined in: [src/XMGTransaction.ts:185](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L185)
 
 Sum of all output values for this transaction.
 
@@ -203,7 +203,7 @@ Total value of outputs as a number (float).
 
 > `static` **fromJSON**(`json`): `XMGTransaction`
 
-Defined in: [src/XMGTransaction.ts:67](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L67)
+Defined in: [src/XMGTransaction.ts:67](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L67)
 
 Parse a JSON string to create a new `XMGTransaction` instance.
 
@@ -227,7 +227,7 @@ A new `XMGTransaction` instance.
 
 > `static` **fromObject**(`obj`): `XMGTransaction`
 
-Defined in: [src/XMGTransaction.ts:77](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L77)
+Defined in: [src/XMGTransaction.ts:77](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L77)
 
 Create a transaction from a plain object already validated or
 normalized to `IXMGTransaction`.
@@ -252,7 +252,7 @@ A new `XMGTransaction` instance.
 
 > `static` **normalizeVin**(`v`): [`XMGInput`](XMGInput.md)
 
-Defined in: [src/XMGTransaction.ts:92](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L92)
+Defined in: [src/XMGTransaction.ts:92](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L92)
 
 Convert various possible "vin" shapes into a normalized `XMGInput`.
 This method is defensive: it accepts heterogeneous shapes from different
@@ -285,7 +285,7 @@ XMGTransaction.normalizeVin({ txid: '1', vout: 0, sequence: 4294967295 });
 
 > `static` **normalizeVout**(`v`): [`XMGOutput`](XMGOutput.md)
 
-Defined in: [src/XMGTransaction.ts:121](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGTransaction.ts#L121)
+Defined in: [src/XMGTransaction.ts:121](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGTransaction.ts#L121)
 
 Normalize a `vout` JSON object into an `XMGOutput`.
 

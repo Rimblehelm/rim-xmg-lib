@@ -6,7 +6,7 @@
 
 # Class: XMGScriptSignature
 
-Defined in: [src/XMGScriptSignature.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L19)
+Defined in: [src/XMGScriptSignature.ts:19](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L19)
 
 Model for a script signature.
 
@@ -19,7 +19,7 @@ transaction's input `scriptSig`.
 
 > **new XMGScriptSignature**(`obj`): `XMGScriptSignature`
 
-Defined in: [src/XMGScriptSignature.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L29)
+Defined in: [src/XMGScriptSignature.ts:29](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L29)
 
 Construct a new XMGScriptSignature from raw scriptSig JSON.
 
@@ -47,7 +47,7 @@ const s = XMGScriptSignature.fromJSON({ asm: '...', hex: '...' });
 
 > **Assembly**: `string`
 
-Defined in: [src/XMGScriptSignature.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L20)
+Defined in: [src/XMGScriptSignature.ts:20](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L20)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/XMGScriptSignature.ts:20](https://github.com/Rimblehelm/rim-xmg
 
 > **Hexadecimal**: `string`
 
-Defined in: [src/XMGScriptSignature.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L21)
+Defined in: [src/XMGScriptSignature.ts:21](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L21)
 
 ## Methods
 
@@ -63,7 +63,7 @@ Defined in: [src/XMGScriptSignature.ts:21](https://github.com/Rimblehelm/rim-xmg
 
 > **toJSON**(): [`IScriptSig`](../interfaces/IScriptSig.md)
 
-Defined in: [src/XMGScriptSignature.ts:57](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L57)
+Defined in: [src/XMGScriptSignature.ts:57](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L57)
 
 Serialize this signature back to the RPC-compatible JSON form.
 
@@ -79,7 +79,7 @@ Serialize this signature back to the RPC-compatible JSON form.
 
 > `static` **fromArray**(`rawArray`): `XMGScriptSignature`[]
 
-Defined in: [src/XMGScriptSignature.ts:47](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L47)
+Defined in: [src/XMGScriptSignature.ts:47](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L47)
 
 Convert an array of raw scriptSig objects into model instances.
 
@@ -103,7 +103,7 @@ Array of `XMGScriptSignature`.
 
 > `static` **fromJSON**(`raw`): `XMGScriptSignature`
 
-Defined in: [src/XMGScriptSignature.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/3949369596ca20bc1373e7ee83cbbd2b042b0704/src/XMGScriptSignature.ts#L39)
+Defined in: [src/XMGScriptSignature.ts:39](https://github.com/Rimblehelm/rim-xmg-lib/blob/64a9ecff0ab400679bf8bd94ab39fd1bb0875437/src/XMGScriptSignature.ts#L39)
 
 Create an `XMGScriptSignature` instance from raw JSON.
 
