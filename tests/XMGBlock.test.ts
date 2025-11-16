@@ -47,7 +47,7 @@ describe('XMGBlock', () => {
     // entropybit false -> 0
     expect(json.entropybit).toBe(0);
     // time round trip: toJSON uses time.getDate() / 1000
-    expect(json.time).toBe(b.time.getDate() / 1000);
+    expect(json.time).toBe(Math.floor(b.time.getTime() / 1000));
   });
 
   it('throws when hash missing', () => {
@@ -107,6 +107,6 @@ describe('XMGBlock', () => {
     const data = { ...raw, time: 0 } as any;
     const b = new XMGBlock(data);
     expect(b.time.getTime()).toBe(0);
-    expect(b.toJSON().time).toBe(b.time.getDate() / 1000);
+    expect(b.toJSON().time).toBe(Math.floor(b.time.getTime() / 1000));
   });
 });

@@ -119,7 +119,8 @@ export class XMGBlock {
             version: this.version,
             merkleroot: this.merkleRoot,
             mint: this.mint,
-            time: this.time.getDate() / 1000,
+            // Use Unix epoch seconds for time (Date.getTime() returns ms)
+            time: Math.floor(this.time.getTime() / 1000),
             nonce: this.nonce,
             bits: this.bits,
             difficulty: this.difficulty,
