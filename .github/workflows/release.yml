@@ -41,6 +41,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate changelog
+        run: |
+          npm run changelog
+
+      - name: Create release notes for tag
+        id: release_notes
+        run: |
+          TAG="${GITHUB_REF##*/}"
+          VERSION="${TAG#v}"
+          awk "/#### ${VERSION}/ {flag=1; next} /^#### / {if(flag==1) exit} flag==1{print}" CHANGELOG.md > release-notes.md || true
+          if [ -s release-notes.md ]; then
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            cat release-notes.md >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "body=Release $TAG" >> $GITHUB_OUTPUT
+          fi
       - name: Run prepublish (lint/typecheck/test/build)
         run: npm run prepublishOnly
 
@@ -55,4 +72,4 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
-          body: "Release ${{ github.ref_name }}"
+          body: ${{ steps.release_notes.outputs.body }}
