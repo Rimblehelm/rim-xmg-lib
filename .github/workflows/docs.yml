@@ -80,6 +80,7 @@ jobs:
 
   deploy-pages:
     name: Deploy Docs to GitHub Pages
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: typedoc
     steps:
