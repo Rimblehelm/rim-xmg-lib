@@ -61,11 +61,20 @@ if [ -n "$REVIEWERS" ]; then
       # We'll use the Teams API to find the team id
       ORG=$(echo "$REPO_FULL" | cut -d/ -f1)
       TEAM_SLUG=$(echo "$r" | cut -d/ -f2)
-      TEAM_ID=$(gh api "/orgs/${ORG}/teams/${TEAM_SLUG}" -q .id)
+      TEAM_ID=$(gh api "/orgs/${ORG}/teams/${TEAM_SLUG}" -q .id 2>/dev/null || true)
+      if [ -z "${TEAM_ID}" ]; then
+        echo "WARNING: Cannot resolve team '${ORG}/${TEAM_SLUG}' — skipping" >&2
+        continue
+      fi
       reviewer_jsons+=("{\"type\":\"Team\",\"id\":${TEAM_ID}}")
     else
       echo "Adding user reviewer: $r"
-      USER_ID=$(gh api "/users/${r}" -q .id)
+      # Guard against missing or invalid usernames — do not abort the script.
+      USER_ID=$(gh api "/users/${r}" -q .id 2>/dev/null || true)
+      if [ -z "${USER_ID}" ]; then
+        echo "WARNING: Cannot resolve user '$r' — user may not exist or token cannot access user info. Skipping reviewer add." >&2
+        continue
+      fi
       reviewer_jsons+=("{\"type\":\"User\",\"id\":${USER_ID}}")
     fi
   done
@@ -75,7 +84,19 @@ if [ -n "$REVIEWERS" ]; then
 
   echo "Creating protection rule with reviewers for environment ${ENV_NAME}"
   echo "$payload" > /tmp/env-protection.json
-  gh api --method POST "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}/protection_rules" --input /tmp/env-protection.json
+  # Add the protection rule; if it fails, don't abort the whole script.
+  # We attempt to create the protection rule; on failure we'll show a verbose
+  # request and then continue so the environment is still created and user
+  # can add the reviewer manually.
+      # post the protection rules; if this fails do a diagnostic verbose try and continue
+      if ! gh api --method POST "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}/protection_rules" --input /tmp/env-protection.json; then
+    echo "WARNING: could not add protection rule via GH API (this may be due to permission or endpoint differences)."
+    echo "Retrying with verbose output for diagnostics..."
+    gh api --method POST "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}/protection_rules" --input /tmp/env-protection.json --verbose || true
+    echo "Cannot add protection rule automatically."
+    echo "You can add the required reviewers via the UI: Settings → Environments → ${ENV_NAME} → Protection rules."
+    echo "Or re-run this script with an ADMIN_GITHUB_TOKEN that has 'repo' and 'admin:org' scopes." >&2
+  fi
   rm -f /tmp/env-protection.json
 fi
 

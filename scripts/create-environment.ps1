@@ -50,15 +50,27 @@ if ($Reviewers -ne "") {
   $reviewersJson = @()
 
   foreach ($r in $reviewerList) {
-    if ($r -like '*/ *') {
+    if ($r -like '*/*') {
       # team
       $parts = $r -split '/'
       $org = $parts[0]
       $slug = $parts[1]
-      $team = gh api "/orgs/$org/teams/$slug" -q .id
+      try {
+        $team = gh api "/orgs/$org/teams/$slug" -q .id 2>$null
+      } catch {
+        Write-Host "WARNING: cannot resolve team '$org/$slug' — skipping" -ForegroundColor Yellow
+        continue
+      }
+      if (-not $team) { Write-Host "WARNING: team '$org/$slug' not found; skipping" -ForegroundColor Yellow; continue }
       $reviewersJson += @{ type = 'Team'; id = [int]$team }
     } else {
-      $uid = gh api "/users/$r" -q .id
+      try {
+        $uid = gh api "/users/$r" -q .id 2>$null
+      } catch {
+        Write-Host "WARNING: user '$r' not found or inaccessible; skipping" -ForegroundColor Yellow
+        continue
+      }
+      if (-not $uid) { Write-Host "WARNING: user '$r' not found; skipping" -ForegroundColor Yellow; continue }
       $reviewersJson += @{ type = 'User'; id = [int]$uid }
     }
   }
@@ -66,7 +78,19 @@ if ($Reviewers -ne "") {
   $payload = @{ type = 'required_reviewers'; reviewers = $reviewersJson; required_approving_review_count = 1 } | ConvertTo-Json -Depth 5
   $tmp = [System.IO.Path]::GetTempFileName()
   $payload | Out-File -FilePath $tmp -Encoding utf8
-  gh api --method POST "/repos/$owner/$repoName/environments/$EnvironmentName/protection_rules" --input $tmp
+  try {
+    gh api --method POST "/repos/$owner/$repoName/environments/$EnvironmentName/protection_rules" --input $tmp
+  } catch {
+    Write-Host "WARNING: could not add protection rule via GitHub API. This may be caused by permission restrictions or a different API path."
+    Write-Host "Retrying with verbose output for diagnostics..."
+    try {
+      gh api --method POST "/repos/$owner/$repoName/environments/$EnvironmentName/protection_rules" --input $tmp --verbose
+    } catch {
+      Write-Host "Cannot add protection rule automatically."
+      Write-Host "You can add the required reviewers via the UI: Settings -> Environments -> $EnvironmentName -> Protection rules."
+      Write-Host "Or re-run this script with an ADMIN_GITHUB_TOKEN that has 'repo' and 'admin:org' scopes."
+    }
+  }
   Remove-Item $tmp
 }
 
