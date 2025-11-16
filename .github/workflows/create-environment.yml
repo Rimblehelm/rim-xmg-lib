@@ -53,7 +53,7 @@ jobs:
       - name: Show token scopes
         run: |
           # Print token scopes attached to GH_TOKEN
-          curl -sI -H "Authorization: token ${GH_TOKEN}" https://api.github.com/user | grep -i "x-oauth-scopes" || true
+          curl -sI -H "Authorization: token ${GH_TOKEN}" https://api.github.com/user | sed -n '1,120p' || true
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
 

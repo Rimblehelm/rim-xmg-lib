@@ -43,7 +43,7 @@ jobs:
 
       - name: Show token scopes
         run: |
-          curl -sI -H "Authorization: token ${ADMIN_TOKEN}" https://api.github.com/user | grep -i "x-oauth-scopes" || true
+          curl -sI -H "Authorization: token ${ADMIN_TOKEN}" https://api.github.com/user | sed -n '1,120p' || true
         env:
           ADMIN_TOKEN: ${{ env.ADMIN_TOKEN }}
 
