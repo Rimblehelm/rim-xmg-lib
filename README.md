@@ -33,6 +33,30 @@ npm install @rimblehelm/rim-xmg-lib
 ```
 
 If you need to publish to npmjs.org instead of GitHub Packages, set an `NPM_TOKEN` secret and update the publish step in `.github/workflows/publish.yml` to use the npm registry URL (`https://registry.npmjs.org/`) and `NODE_AUTH_TOKEN` set to `${{ secrets.NPM_TOKEN }}`.
+Local token validation scripts
+------------------------------
+
+To validate an `NPM_TOKEN` locally (recommended before pushing), use the included scripts (Bash and PowerShell):
+
+- Linux/macOS / Git Bash / WSL:
+
+```bash
+export NPM_TOKEN=your-token-here
+./scripts/test-npm-token.sh
+```
+
+- Windows PowerShell:
+
+```powershell
+$env:NPM_TOKEN = 'your-token-here'
+.\scripts\test-npm-token.ps1
+```
+
+These scripts perform two checks:
+- `npm whoami --registry https://registry.npmjs.org/` — ensures the token can authenticate.
+- `npm publish --dry-run --registry https://registry.npmjs.org/` — validates that the token can publish (dry-run).
+
+If the account requires 2FA for publishing, the dry-run will show an `EOTP` error. In that case create a new npm Automation token via the npm website and place the token in the `NPM_TOKEN` secret in GitHub.
 
 To publish from the `Publish` workflow to npmjs.org via manual dispatch, use the `workflow_dispatch` input `use_npm=true` and ensure your `NPM_TOKEN` secret is set. The workflow will fail early if `NPM_TOKEN` is missing. Example (from Actions UI):
 
