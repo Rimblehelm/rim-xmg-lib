@@ -24,6 +24,9 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y gh
+      - name: Authenticate GH CLI with token
+        run: |
+          echo "${GH_TOKEN}" | gh auth login --with-token
 
       - name: Create release and docs environments
         run: |
