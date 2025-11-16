@@ -64,22 +64,27 @@ jobs:
         run: |
           echo "NPM token check (warn-only): ${{ steps.npm_check_ci.outputs.result }}"
         shell: bash
-      - name: Upload coverage to Coveralls
+      - name: Upload coverage to Coveralls (Parallel)
         if: env.COVERALLS_REPO_TOKEN != ''
-        uses: coverallsapp/github-action@v1
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./coverage/lcov.info
+          flag-name: run-${{ matrix.os }}
+          parallel: true
         # env already set above
 
-      - name: Comment with Coveralls link (PRs only)
-        if: github.event_name == 'pull_request' && env.COVERALLS_REPO_TOKEN != ''
-        uses: peter-evans/create-or-update-comment@v4
+  finish:
+    name: Finish Coveralls
+    needs: build-and-test
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            Code coverage uploaded to Coveralls: https://coveralls.io/github/rimblehelm/rim-xmg-lib
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
+          carryforward: "run-ubuntu-latest,run-windows-latest,run-macos-latest"
 
   # Docs publishing is handled by the dedicated `docs.yml` workflow which
   # runs after CI completes (or on pushes to main/PRs). This keeps the
