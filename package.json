@@ -27,6 +27,7 @@
 		"docs": "typedoc --options typedoc.json",
 		"docs:build": "npm run docs && echo \"Docs generated in ./docs\"",
 		"docs:md": "typedoc --options typedoc.json"
+		,"test:npm-token": "bash ./scripts/test-npm-token.sh"
 		,"changelog": "auto-changelog -p"
 	},
 	"keywords": [

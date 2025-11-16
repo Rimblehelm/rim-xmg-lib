@@ -81,6 +81,21 @@ gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use
 
 If you need help creating an npm Automation token I can add a short visual guide or a script to validate the token locally.
 
+Re-run Publish from the CLI
+--------------------------
+
+After you set `NPM_TOKEN` to an Automation token, you can trigger the `Publish` workflow from the command line (GH CLI) as follows:
+
+```bash
+gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use_npm=true
+```
+
+You can also validate your token locally with the included `npm` script:
+
+```bash
+npm run test:npm-token
+```
+
 Generate API docs locally:
 
 ```bash
