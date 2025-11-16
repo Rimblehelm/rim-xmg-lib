@@ -41,6 +41,19 @@ jobs:
         env:
           GH_TOKEN: ${{ env.ADMIN_TOKEN }}
 
+      - name: Show token scopes
+        run: |
+          curl -sI -H "Authorization: token ${ADMIN_TOKEN}" https://api.github.com/user | grep -i "x-oauth-scopes" || true
+        env:
+          ADMIN_TOKEN: ${{ env.ADMIN_TOKEN }}
+
+      - name: Show repo permission for token user
+        run: |
+          USER=$(gh api /user -q .login)
+          gh api "/repos/${{ github.repository }}/collaborators/${USER}/permission" -q .permission || true
+        env:
+          ADMIN_TOKEN: ${{ env.ADMIN_TOKEN }}
+
       - name: Validate ADMIN_GITHUB_TOKEN for auto-create
         run: |
           # The auto-create workflow requires elevated permissions; fail early with a clear message

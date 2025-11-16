@@ -50,6 +50,20 @@ jobs:
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
 
+      - name: Show token scopes
+        run: |
+          # Print token scopes attached to GH_TOKEN
+          curl -sI -H "Authorization: token ${GH_TOKEN}" https://api.github.com/user | grep -i "x-oauth-scopes" || true
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+
+      - name: Show repo permission for token user
+        run: |
+          USER=$(gh api /user -q .login)
+          gh api "/repos/${{ github.repository }}/collaborators/${USER}/permission" -q .permission || true
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+
       - name: Create environment and add reviewers
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
