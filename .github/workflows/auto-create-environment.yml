@@ -1,0 +1,29 @@
+name: Auto-create Release Environment
+
+# Run when a repo is created; we'll only run when the repository is a template
+on:
+  repository:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  create-from-template:
+    if: github.event.repository.is_template == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install GH CLI
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gh
+
+      - name: Create release environment
+        run: |
+          chmod +x ./scripts/create-environment.sh
+          # no reviewers by default — admins can add them later
+          ./scripts/create-environment.sh release ""

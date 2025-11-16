@@ -5,6 +5,15 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      envName:
+        description: 'Environment name to use for gating (e.g., release)'
+        required: false
+        default: 'release'
+      dryRun:
+        description: 'If true, skip actual npm publish and perform dry-run only'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -16,6 +25,9 @@ jobs:
       release_body: ${{ steps.release_notes.outputs.body }}
     name: Prepare release
     runs-on: ubuntu-latest
+    env:
+      RELEASE_ENV: ${{ github.event.inputs.envName || 'release' }}
+      DRY_RUN: ${{ github.event.inputs.dryRun || 'false' }}
 
     steps:
       - name: Checkout repository
@@ -107,7 +119,7 @@ jobs:
     name: Publish package (requires approval)
     runs-on: ubuntu-latest
     needs: prepare
-    environment: release
+    environment: ${{ env.RELEASE_ENV }}
 
     steps:
       - name: Checkout repository
@@ -145,7 +157,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --registry=https://npm.pkg.github.com
+          if [ "${DRY_RUN}" = "true" ]; then
+            echo "DRY_RUN is enabled — running npm publish --dry-run"
+            npm publish --dry-run --registry=https://npm.pkg.github.com
+          else
+            npm publish --registry=https://npm.pkg.github.com
+          fi
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
