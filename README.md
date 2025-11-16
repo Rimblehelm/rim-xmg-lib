@@ -192,6 +192,33 @@ gh workflow run "Create Release Environment" --repo rimblehelm/rim-xmg-lib --ref
 
 If you prefer automated environment creation from CI (not recommended for security reasons), tell me and I can add an extra trigger to automate it on a push to `master`.
 
+Auto-create environment on repo template creation
+-------------------------------------------------
+
+The repository contains an `Auto-create Release Environment` workflow that runs when a repository is created from a template. It will automatically create a `release` environment for you. This is convenient if you use a template to create new repos and want the release gating to exist immediately.
+
+- The workflow runs on the `repository.created` event and will only execute when `repository.is_template` is true.
+- It creates a `release` environment but does not add reviewers automatically — you can add reviewers via the `Create Release Environment` workflow or by running the script locally.
+
+If you do not want this behavior for new repos created from templates, delete or disable `.github/workflows/auto-create-environment.yml`.
+
+Configuring `release.yml` at run-time (optional inputs)
+-----------------------------------------------------
+
+The `release.yml` workflow supports manual runs (and tag pushes). When running manually from the Actions UI or `gh workflow run` you can override two inputs:
+
+- `envName` — which environment to use for gating the publish step. Default: `release`.
+- `dryRun` — if set to `true`, the publish step will run `npm publish --dry-run` and will not actually publish a package. Default: `false`.
+
+Examples:
+
+```bash
+# Run the workflow manually with a different environment and dry run
+gh workflow run "Release" --ref master --repo rimblehelm/rim-xmg-lib --field envName=preprod --field dryRun=true
+```
+
+If instead you push a tag like `v0.0.3`, the workflow will trigger automatically and use the default environment name and publish behavior (env `release`, `dryRun=false`) unless you specifically trigger the workflow via the UI or CLI and set inputs.
+
 Generate API docs locally:
 
 ```bash
