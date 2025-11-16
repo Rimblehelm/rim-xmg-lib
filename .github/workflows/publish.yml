@@ -114,7 +114,30 @@ jobs:
         run: |
           node -e "const p=require('./package.json'); p.publishConfig={registry:'https://registry.npmjs.org/'}; require('fs').writeFileSync('./package.json', JSON.stringify(p, null, 2)); console.log('publishConfig overridden to npmjs');"
 
-      - name: Publish to npm registry
-        run: npm publish --registry $PUBLISH_REGISTRY
+      - name: Publish to npm registry (EOTP aware)
         env:
           NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+          PUBLISH_REGISTRY: ${{ env.PUBLISH_REGISTRY }}
+        run: |
+          # Capture output for troubleshooting
+          mkdir -p /tmp/npm-publish && npm publish --registry "$PUBLISH_REGISTRY" 2>&1 | tee /tmp/npm-publish/publish.log || true
+
+          status=$?
+
+          # If the publish command failed, diagnose a one-time-password (2FA) error
+          if grep -qi "EOTP" /tmp/npm-publish/publish.log; then
+            echo "ERROR: npm publish failed because npm requires a one-time password (2FA)."
+            echo "To fix: create an npm "Automation" access token on npmjs and add it as the NPM_TOKEN secret."
+            echo "See: https://docs.npmjs.com/creating-and-viewing-access-tokens"
+            exit 1
+          fi
+
+          # Also check for 401 / unauthorized errors
+          if grep -qi "401" /tmp/npm-publish/publish.log || grep -qi "Unauthorized" /tmp/npm-publish/publish.log; then
+            echo "ERROR: npm publish failed with an authorization error (401)."
+            echo "Check that your NPM_TOKEN is present and has publish rights for this package, and that the token is an Automation token (not an OTP-protected interactive token)."
+            exit 1
+          fi
+
+          # Otherwise exit with original status
+          exit $status
