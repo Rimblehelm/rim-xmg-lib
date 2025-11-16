@@ -70,22 +70,35 @@ jobs:
         run: |
           TAG="${GITHUB_REF##*/}"
           VERSION="${TAG#v}"
-          # Try to match both with brackets [vX.X.X] and without
-          awk "/#### \[${TAG}\]/ {flag=1; next} /^#### / {if(flag==1) exit} flag==1{print}" CHANGELOG.md > release-notes.md || true
-          # If that didn't work, try without the v prefix
+          # Extract content between the version header and the next header
+          sed -n "/#### \[${TAG}\]/,/^#### /p" CHANGELOG.md | sed '1d;$d' > release-notes.md || true
+          # If that didn't work, try with just the version number
           if [ ! -s release-notes.md ]; then
-            awk "/#### \[${VERSION}\]/ {flag=1; next} /^#### / {if(flag==1) exit} flag==1{print}" CHANGELOG.md > release-notes.md || true
+            sed -n "/#### \[v${VERSION}\]/,/^#### /p" CHANGELOG.md | sed '1d;$d' > release-notes.md || true
           fi
-          # If still empty, try without brackets
-          if [ ! -s release-notes.md ]; then
-            awk "/#### ${TAG}/ {flag=1; next} /^#### / {if(flag==1) exit} flag==1{print}" CHANGELOG.md > release-notes.md || true
-          fi
+          # Clean up and check if we have content
+          sed -i '/^$/d' release-notes.md 2>/dev/null || sed -i'' -e '/^$/d' release-notes.md || true
           if [ -s release-notes.md ]; then
             echo "body<<EOF" >> $GITHUB_OUTPUT
             cat release-notes.md >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
-            echo "body=Release $TAG" >> $GITHUB_OUTPUT
+            # Generate a simple release note from git commits
+            PREV_TAG=$(git describe --tags --abbrev=0 ${TAG}^ 2>/dev/null || echo "")
+            if [ -n "$PREV_TAG" ]; then
+              COMMITS=$(git log ${PREV_TAG}..${TAG} --pretty=format:"- %s" 2>/dev/null || echo "")
+            else
+              COMMITS=$(git log ${TAG} --pretty=format:"- %s" --max-count=10 2>/dev/null || echo "")
+            fi
+            if [ -n "$COMMITS" ]; then
+              echo "$COMMITS" > release-notes.md
+              echo "body<<EOF" >> $GITHUB_OUTPUT
+              echo "$COMMITS" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "Release ${TAG}" > release-notes.md
+              echo "body=Release ${TAG}" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Ensure release notes exist (if required)
