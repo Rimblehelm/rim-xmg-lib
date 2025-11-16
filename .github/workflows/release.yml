@@ -54,7 +54,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Authenticate to GitHub Packages
-        if: ${{ secrets.NPM_TOKEN != '' }}
+        if: steps.npm_check.outputs.token_available == 'true'
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
@@ -160,7 +160,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Authenticate to GitHub Packages
-        if: ${{ secrets.NPM_TOKEN != '' }}
+        if: steps.npm_check_publish.outputs.token_available == 'true'
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
