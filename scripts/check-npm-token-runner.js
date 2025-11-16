@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const child_process = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { hasAutomationToken } = require('./check-npm-token');
@@ -11,7 +11,7 @@ function runTokenCheck() {
   const tmpNpmrc = path.join(process.cwd(), 'tmp-npmrc-secret-status');
   try {
     fs.writeFileSync(tmpNpmrc, `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}`);
-    const out = execSync('npm token list --json --registry https://registry.npmjs.org/', {
+    const out = child_process.execSync('npm token list --json --registry https://registry.npmjs.org/', {
       env: { ...process.env, npm_config_userconfig: tmpNpmrc },
       stdio: ['pipe', 'pipe', 'pipe'],
     });
