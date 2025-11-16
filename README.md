@@ -1,9 +1,15 @@
+[!NOTE] You can restrict who can update the `SECRETS_STATUS.json` by adding a `STATUS_COMMIT_TOKEN` repository secret; the status workflow will only commit changes if this secret is present.
 # rim-xmg-lib
 
+[![CI](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml)
 [![Docs CI](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
 [![Coverage](https://coveralls.io/repos/github/rimblehelm/rim-xmg-lib/badge.svg?branch=main)](https://coveralls.io/github/rimblehelm/rim-xmg-lib)
 Note: Coveralls will post a comment on pull requests with a link to the coverage report.
+
+[![Secrets](https://img.shields.io/badge/Secrets-NPM_TOKEN%20%7C%20COVERALLS%20REPO%20TOKEN-lightgrey)](docs/SECRETS.md)
+
+[![Publish readiness](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/rimblehelm/rim-xmg-lib/main/docs/SECRETS_STATUS.json)](docs/SECRETS_STATUS.md)
 
 ### Coveralls setup
 
@@ -14,6 +20,8 @@ To enable Coveralls reporting on PRs and see the coverage badge in this README, 
 3. Push a commit or open a PR and the CI will upload coverage and post a link in the PR comments
 
 If you want CI to fail when coverage drops below the configured threshold, we enforce this via `vitest` settings in `vitest.config.ts` which defines 80% thresholds for statements, branches, functions and lines.
+
+See `docs/SECRETS.md` for a short guide to setting repository secrets used in CI and publishing (e.g., `COVERALLS_REPO_TOKEN`, `NPM_TOKEN`).
 
 A small TypeScript utility library for parsing Coin Magi (XMG) blocks and transactions.
 
@@ -33,6 +41,13 @@ npm install @rimblehelm/rim-xmg-lib
 ```
 
 If you need to publish to npmjs.org instead of GitHub Packages, set an `NPM_TOKEN` secret and update the publish step in `.github/workflows/publish.yml` to use the npm registry URL (`https://registry.npmjs.org/`) and `NODE_AUTH_TOKEN` set to `${{ secrets.NPM_TOKEN }}`.
+You can also validate your Coveralls token locally:
+
+```bash
+export GITHUB_REPOSITORY="<owner>/<repo>"
+export COVERALLS_REPO_TOKEN="<your-token>"
+npm run check:coveralls
+```
 Local token validation scripts
 ------------------------------
 
@@ -97,7 +112,24 @@ gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use
 	- Ensure your `Publish` workflow includes the `id-token: write` permission (the workflow in this repo sets it by default).
 	- When manually dispatching the `Publish` workflow, select `use_npm: true` and `use_oidc: true` — this will attempt to use OIDC to publish (no `NPM_TOKEN` required).
 
+	How to add Trusted Publisher on npmjs.com (high level):
+	1. Sign in to npmjs.com and go to your package page.
+	2. Open Settings → Trusted Publisher (section).
+	3. Choose `GitHub Actions` as the provider.
+	4. Fill in Organization/User and Repository. For the workflow filename enter `publish.yml` (this must match exactly — case-sensitive).
+	5. Save and try running the `Publish` job again with `use_oidc: true`.
+
+	Troubleshooting: If the publish step fails with `ENEEDAUTH` or `need auth`, then the repository isn't set up as a trusted publisher or the workflow filename doesn't match. If you prefer not to use Trusted Publishing, set `use_oidc: false` and create an automation token on npm (or a proper granular token) and configure `NPM_TOKEN` in GitHub secrets.
+
 	If OIDC-based trusted publishing isn't configured for your repo, the workflow will fall back to the token-based path if you supply an `NPM_TOKEN`. The workflow contains helpful diagnostics and instructions to create an Automation (or granular) token if necessary.
+
+	Short Publish checklist (quick reference):
+
+	1. Set repository secret `NPM_TOKEN` with an npm Automation token if publishing to npmjs.org using token-based auth.
+	2. Alternatively, enable Trusted Publishing (OIDC) on npmjs and run `Publish` with `use_oidc=true` — then you do not need `NPM_TOKEN`.
+	3. For private repos, add `COVERALLS_REPO_TOKEN` to enable coverage uploads and PR comments.
+
+	Note: The `Publish` workflow has a pre-check that will fail early if `use_npm=true` and `use_oidc=false` but `NPM_TOKEN` isn't set; this prevents confusing late failures when publishing to npmjs.org.
 
 	New in CI: we also added a step that checks your NPM token's type and fails early if the token is not an "Automation" token. This reduces confusion caused by 2FA (EOTP) tokens which cannot be used in CI.
 
@@ -117,6 +149,29 @@ You can also validate your token locally with the included `npm` script:
 ```bash
 npm run test:npm-token
 ```
+
+Automatic release environment creation
+-------------------------------------
+
+You can create a `release` environment and add required reviewers using the GitHub CLI. This is helpful to ensure there's a manual approval step for publishing from CI.
+
+Requirements:
+- GitHub CLI (`gh`) installed and authenticated (run `gh auth login`).
+- You must be a repository admin to manage environments.
+
+Example (Bash):
+
+```bash
+./scripts/create-environment.sh release mikee.kelly,orgname/reviewers-team
+```
+
+Example (PowerShell):
+
+```powershell
+.\\scripts\\create-environment.ps1 -EnvironmentName release -Reviewers "mikee.kelly,orgname/reviewers-team"
+```
+
+The script will create the environment and add a protection rule requiring reviews from the specified users or teams. Use this if you want a human to approve the release job before GitHub Actions publishes the package.
 
 Generate API docs locally:
 
