@@ -34,6 +34,13 @@ npm install @rimblehelm/rim-xmg-lib
 
 If you need to publish to npmjs.org instead of GitHub Packages, set an `NPM_TOKEN` secret and update the publish step in `.github/workflows/publish.yml` to use the npm registry URL (`https://registry.npmjs.org/`) and `NODE_AUTH_TOKEN` set to `${{ secrets.NPM_TOKEN }}`.
 
+To publish from the `Publish` workflow to npmjs.org via manual dispatch, use the `workflow_dispatch` input `use_npm=true` and ensure your `NPM_TOKEN` secret is set. The workflow will fail early if `NPM_TOKEN` is missing. Example (from Actions UI):
+
+- Open the `Publish` workflow in the Actions tab and click **Run workflow**
+- Select `use_npm: true` then click **Run workflow**
+
+This will switch the registry to `https://registry.npmjs.org/` and use `NPM_TOKEN` to authenticate.
+
 Generate API docs locally:
 
 ```bash
