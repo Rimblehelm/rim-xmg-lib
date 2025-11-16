@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -60,6 +61,26 @@ jobs:
           fi
       - name: Run prepublish (lint/typecheck/test/build)
         run: npm run prepublishOnly
+
+      - name: Commit generated CHANGELOG.md (if changed)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          TAG="${GITHUB_REF##*/}"
+          DEFAULT_BRANCH=$(git rev-parse --abbrev-ref origin/HEAD 2>/dev/null | sed 's@origin/@@')
+          if [ -z "$DEFAULT_BRANCH" ]; then DEFAULT_BRANCH="master"; fi
+          echo "Detected default branch: $DEFAULT_BRANCH"
+          git checkout $DEFAULT_BRANCH || git checkout -b $DEFAULT_BRANCH
+          git pull origin $DEFAULT_BRANCH || true
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "CHANGELOG.md not changed"
+          else
+            git add CHANGELOG.md
+            git commit -m "docs(changelog): update for ${TAG}"
+            git push origin $DEFAULT_BRANCH
+          fi
 
       - name: Publish to GitHub Packages
         env:
