@@ -3,6 +3,7 @@
 
 [![CI](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/Rimblehelm/rim-xmg-lib/actions/workflows/ci.yml)
 [![Docs CI](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/docs.yml)
+[![Release](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml/badge.svg)](https://github.com/rimblehelm/rim-xmg-lib/actions/workflows/release.yml)
 [![Docs Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https://rimblehelm.github.io/rim-xmg-lib/)](https://rimblehelm.github.io/rim-xmg-lib/)
 [![Coverage](https://coveralls.io/repos/github/rimblehelm/rim-xmg-lib/badge.svg?branch=main)](https://coveralls.io/github/rimblehelm/rim-xmg-lib)
 Note: Coveralls will post a comment on pull requests with a link to the coverage report.
@@ -172,6 +173,18 @@ Example (PowerShell):
 ```
 
 The script will create the environment and add a protection rule requiring reviews from the specified users or teams. Use this if you want a human to approve the release job before GitHub Actions publishes the package.
+
+Create `docs` environment for docs deploy
+---------------------------------------
+
+Create a `docs` environment to protect automated Docs deployment (the `deploy-pages` job is now gated by this environment).
+Use the same GH CLI script provided earlier to create the docs environment and require reviewers:
+
+```bash
+./scripts/create-environment.sh docs docs-team,docs-manager
+```
+
+This will create the `docs` environment; when the `deploy-pages` job runs, it will pause and require approval if you set that in the environment's protection rules.
 
 GitHub Actions — create environment workflow
 --------------------------------------------
