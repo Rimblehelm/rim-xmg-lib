@@ -146,6 +146,8 @@ After you set `NPM_TOKEN` to an Automation token, you can trigger the `Publish` 
 gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use_npm=true
 ```
 
+Note: the repository now treats `release.yml` as the single automated release path and the `Publish` workflow is manual-only by default. Automatic publishing on tag push has been removed from `publish.yml` to ensure that releases always go through the `release` environment gate and required reviewer approvals. Use `Release` workflow to create/tag releases and publish packages automatically.
+
 You can also validate your token locally with the included `npm` script:
 
 ```bash
@@ -174,6 +176,11 @@ Example (PowerShell):
 ```
 
 The script will create the environment and add a protection rule requiring reviews from the specified users or teams. Use this if you want a human to approve the release job before GitHub Actions publishes the package.
+
+Notes & troubleshooting for reviewers:
+- Reviewer entries must be valid GitHub usernames or an `org/team-slug` (e.g., `myorg/docs-team`). If a user or team is not found you'll get a 404 from the API.
+- The workflow runs with a token: prefer using the `ADMIN_GITHUB_TOKEN` repository secret (a PAT) with `repo` and `admin:org` scopes when creating reviewers for org teams.
+- If the script cannot add reviewers automatically it will still create the environment; you will then need to add the reviewer(s) manually via Settings → Environments → <env> → Protection rules.
 
 Create `docs` environment for docs deploy
 ---------------------------------------

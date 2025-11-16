@@ -1,11 +1,9 @@
 name: Publish
 
 on:
-  release:
-    types: [published]
-  push:
-    tags:
-      - 'v*'
+  # Publishing should only be triggered via the Release workflow to ensure the
+  # environment gates and required reviewers are respected. Keep `publish.yml`
+  # available for ad-hoc/manual dispatch only.
   workflow_dispatch:
     inputs:
       use_npm:
