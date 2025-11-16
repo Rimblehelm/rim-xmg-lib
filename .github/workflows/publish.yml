@@ -75,6 +75,20 @@ jobs:
           echo "Checking npm authentication at $PUBLISH_REGISTRY"
           npm whoami --registry "$PUBLISH_REGISTRY" || (echo "ERROR: npm whoami failed — your NPM_TOKEN may be invalid or lack publish access for this package"; exit 1)
 
+      - name: Verify NPM token type is Automation (CI-only)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        env:
+          PUBLISH_REGISTRY: ${{ env.PUBLISH_REGISTRY }}
+        run: |
+          echo "Verifying NPM token type on $PUBLISH_REGISTRY"
+          # npm token list returns tokens for the authenticated user. Ensure the token in use is type 'automation'.
+          # We avoid printing the list directly to keep tokens and IDs private.
+          if ! npm token list --json --registry "$PUBLISH_REGISTRY" 2>/dev/null | node -e "const fs=require('fs'); const s=fs.readFileSync(0,'utf8'); const tokens=(s?JSON.parse(s):[]); if(tokens.some(t=>t.type==='automation')) process.exit(0); else process.exit(1)"; then
+            echo "ERROR: NPM_TOKEN does not appear to be an Automation token or lacks permission to list tokens."
+            echo "Fix: create an npm Automation token in https://www.npmjs.com/settings/access-tokens and add it to GitHub Secrets as NPM_TOKEN."
+            exit 1
+          fi
+
       - name: Set scoped registry for npmjs (if publishing there)
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
         run: |

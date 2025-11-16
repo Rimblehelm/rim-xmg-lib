@@ -56,6 +56,14 @@ These scripts perform two checks:
 - `npm whoami --registry https://registry.npmjs.org/` — ensures the token can authenticate.
 - `npm publish --dry-run --registry https://registry.npmjs.org/` — validates that the token can publish (dry-run).
 
+Additionally, you can verify locally that the token is an Automation token by running:
+
+```bash
+npm token list --json --registry https://registry.npmjs.org/ | node -e "const fs=require('fs'); const s=fs.readFileSync(0,'utf8'); const tokens=(s?JSON.parse(s):[]); console.log(tokens.some(t=>t.type==='automation'))"
+```
+
+This prints `true` if the token is an Automation token (suitable for CI). If it prints `false` or fails, create an Automation token on npmjs.
+
 If the account requires 2FA for publishing, the dry-run will show an `EOTP` error. In that case create a new npm Automation token via the npm website and place the token in the `NPM_TOKEN` secret in GitHub.
 
 To publish from the `Publish` workflow to npmjs.org via manual dispatch, use the `workflow_dispatch` input `use_npm=true` and ensure your `NPM_TOKEN` secret is set. The workflow will fail early if `NPM_TOKEN` is missing. Example (from Actions UI):
@@ -78,6 +86,8 @@ gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use
 	- The `Check NPM token (whoami)` step authenticates to the configured registry and prints the npm username — this confirms your token is valid.
 	- The new `Debug npm config and whoami` step prints the `npm` global registry and the resolved scoped registry for your package scope so you can confirm the publish target.
 	- The `Publish to npm registry (EOTP aware)` step captures `npm` logs and prints a helpful remediation message if `EOTP` (2FA) or `401`/`Unauthorized` errors occur.
+
+	New in CI: we also added a step that checks your NPM token's type and fails early if the token is not an "Automation" token. This reduces confusion caused by 2FA (EOTP) tokens which cannot be used in CI.
 
 If you need help creating an npm Automation token I can add a short visual guide or a script to validate the token locally.
 
