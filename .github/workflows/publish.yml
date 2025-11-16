@@ -64,13 +64,31 @@ jobs:
           else
             echo "Configuring npm auth for GitHub Packages";
             npm config set //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN;
-                - name: Set scoped registry for npmjs (if publishing there)
-                  if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
-                  run: |
-                    SCOPE=$(node -p "require('./package.json').name.split('/')[0]");
-                    echo "Setting $SCOPE:registry to $PUBLISH_REGISTRY";
-                    npm config set ${SCOPE}:registry $PUBLISH_REGISTRY;
           fi
+
+      - name: Check NPM token (whoami)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+          PUBLISH_REGISTRY: ${{ env.PUBLISH_REGISTRY }}
+        run: |
+          echo "Checking npm authentication at $PUBLISH_REGISTRY"
+          npm whoami --registry "$PUBLISH_REGISTRY" || (echo "ERROR: npm whoami failed — your NPM_TOKEN may be invalid or lack publish access for this package"; exit 1)
+
+      - name: Set scoped registry for npmjs (if publishing there)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+        run: |
+          SCOPE=$(node -p 'require("./package.json").name.split("/")[0]')
+          if [[ -z "$SCOPE" || "$SCOPE" == "$(node -p 'require("./package.json").name')" ]]; then
+            echo "Package is not scoped; skipping scoped registry configuration."
+            exit 0
+          fi
+          if [[ "$SCOPE" != @* ]]; then
+            echo "Resolved scope ($SCOPE) does not start with @; skipping scoped registry configuration."
+            exit 0
+          fi
+          echo "Setting ${SCOPE}:registry to $PUBLISH_REGISTRY"
+          npm config set "${SCOPE}:registry" "$PUBLISH_REGISTRY"
 
       - name: Publish to npm registry
         # For scoped packages that use publishConfig in package.json we need to
