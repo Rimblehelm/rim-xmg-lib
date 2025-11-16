@@ -30,6 +30,26 @@ describe('XMGBlock', () => {
     expect(b.isGenesis).toBe(false);
   });
 
+  it('handles proof-of-work flags and missing transactions', () => {
+    const data = { ...raw, flags: 'proof-of-work', tx: undefined } as any;
+    const b = new XMGBlock(data);
+    expect(b.isProofOfWork).toBe(true);
+    expect(b.isProofOfStake).toBe(false);
+    expect(b.hasStakeModifier).toBe(false);
+    expect(b.txCount).toBe(0);
+  });
+
+  it('normalizes mint and formats toJSON values', () => {
+    const data = { ...raw, mint: '5', entropybit: 0 } as any;
+    const b = new XMGBlock(data);
+    expect(b.mint).toBe(5);
+    const json = b.toJSON();
+    // entropybit false -> 0
+    expect(json.entropybit).toBe(0);
+    // time round trip: toJSON uses time.getDate() / 1000
+    expect(json.time).toBe(b.time.getDate() / 1000);
+  });
+
   it('throws when hash missing', () => {
     const clone = { ...raw } as any;
     delete clone.hash;
@@ -63,5 +83,30 @@ describe('XMGBlock', () => {
     const j = b.toJSON();
     expect(j.entropybit).toBe(1);
     expect(Array.isArray(j.tx)).toBe(true);
+  });
+
+  it('supports fromJSON and fromArray helper methods', () => {
+    const b = XMGBlock.fromJSON(raw as any);
+    expect(b).toBeInstanceOf(XMGBlock);
+    const arr = XMGBlock.fromArray([raw as any, raw as any]);
+    expect(arr.length).toBe(2);
+  });
+
+  it('handles mint as number and toJSON tx is a copy', () => {
+    const data = { ...raw, mint: 7, tx: ['a', 'b'] } as any;
+    const b = new XMGBlock(data);
+    expect(b.mint).toBe(7);
+    const json = b.toJSON();
+    // Ensure tx array is copied
+    json.tx.push('c');
+    expect(b.txCount).toBe(2);
+    expect(json.tx.length).toBe(3);
+  });
+
+  it('handles time epoch -> toJSON time small non-zero value', () => {
+    const data = { ...raw, time: 0 } as any;
+    const b = new XMGBlock(data);
+    expect(b.time.getTime()).toBe(0);
+    expect(b.toJSON().time).toBe(b.time.getDate() / 1000);
   });
 });
