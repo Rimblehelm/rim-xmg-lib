@@ -35,6 +35,12 @@ jobs:
             echo "${FALLBACK_TOKEN}" | gh auth login --with-token
           fi
 
+      - name: Show token owner
+        run: |
+          gh api /user -q .login || echo 'unknown'
+        env:
+          GH_TOKEN: ${{ env.ADMIN_TOKEN }}
+
       - name: Validate ADMIN_GITHUB_TOKEN for auto-create
         run: |
           # The auto-create workflow requires elevated permissions; fail early with a clear message

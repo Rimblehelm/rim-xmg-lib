@@ -43,6 +43,7 @@ if (-not (gh api --method PUT "/repos/$owner/$repoName/environments/$Environment
   Write-Host "When running from Actions, configure the ADMIN_GITHUB_TOKEN repository secret with a PAT that has the 'repo' scope and try again."
   exit 1
 }
+Write-Host "Using GH user: $(gh api /user -q .login 2>$null)"
 
 if ($Reviewers -ne "") {
   $reviewerList = $Reviewers -split ',' | ForEach-Object { $_.Trim() }

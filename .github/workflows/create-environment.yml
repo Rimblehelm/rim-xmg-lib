@@ -44,6 +44,12 @@ jobs:
             echo "GH_TOKEN=${FALLBACK_TOKEN}" >> $GITHUB_ENV
           fi
 
+      - name: Show token owner
+        run: |
+          echo "GH user: $(gh api /user -q .login || echo 'unknown')"
+        env:
+          GH_TOKEN: ${{ env.GH_TOKEN }}
+
       - name: Create environment and add reviewers
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}

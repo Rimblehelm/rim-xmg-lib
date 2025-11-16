@@ -40,6 +40,8 @@ if [ -z "${GH_TOKEN:-}" ]; then
   fi
 fi
 
+echo "Using GH user: $(gh api /user -q .login 2>/dev/null || echo 'unknown')"
+
 # Create or update environment
 if ! gh api --method PUT "/repos/${OWNER}/${REPO}/environments/${ENV_NAME}" >/dev/null 2>&1; then
   echo "ERROR: couldn't create or update environment '${ENV_NAME}'."
