@@ -1,9 +1,9 @@
 name: Publish
 
 on:
-  # Publishing should only be triggered via the Release workflow to ensure the
-  # environment gates and required reviewers are respected. Keep `publish.yml`
-  # available for ad-hoc/manual dispatch only.
+  release:
+    types: [published]
+  # Keep `workflow_dispatch` for manual/pipeline runs
   workflow_dispatch:
     inputs:
       use_npm:
@@ -37,6 +37,7 @@ jobs:
   publish:
     name: Publish package to GitHub Packages
     runs-on: ubuntu-latest
+    environment: release
 
     steps:
       - name: Checkout repository

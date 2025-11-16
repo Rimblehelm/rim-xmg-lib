@@ -146,7 +146,7 @@ After you set `NPM_TOKEN` to an Automation token, you can trigger the `Publish` 
 gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use_npm=true
 ```
 
-Note: the repository now treats `release.yml` as the single automated release path and the `Publish` workflow is manual-only by default. Automatic publishing on tag push has been removed from `publish.yml` to ensure that releases always go through the `release` environment gate and required reviewer approvals. Use `Release` workflow to create/tag releases and publish packages automatically.
+Note: the repository now triggers package publishes once a GitHub Release is created. The `Publish` workflow is triggered on `release: published` and is protected by the `release` environment (requires reviewers) so the release package step will pause for approval before publishing. If you want to publish by hand instead, the `Publish` workflow remains callable from the Actions UI (`workflow_dispatch`).
 
 You can also validate your token locally with the included `npm` script:
 
