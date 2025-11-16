@@ -175,5 +175,15 @@ jobs:
             exit 1
           fi
 
+            # If OIDC is enabled by dispatcher but the trusted publisher is not configured,
+            # npm will produce ENEEDAUTH / 'need auth'. Detect that and provide OIDC-specific guidance.
+            if grep -qi "ENEEDAUTH" /tmp/npm-publish/publish.log || grep -qi "need auth" /tmp/npm-publish/publish.log || grep -qi "Unable to authenticate" /tmp/npm-publish/publish.log; then
+              echo "ERROR: npm publish failed to authenticate."
+              echo "This usually means Trusted Publishing (OIDC) is not configured for this repository or workflow on npmjs."
+              echo "Fix: go to your package Settings on npmjs.com → Trusted Publisher and add your GitHub repository and workflow filename (publish.yml)."
+              echo "Alternatively, use a token by setting NPM_TOKEN in your repository actions secrets and running use_oidc=false when dispatching the workflow."
+              exit 1
+            fi
+
           # Otherwise exit with original status
           exit $status
