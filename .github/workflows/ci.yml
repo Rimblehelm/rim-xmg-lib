@@ -13,6 +13,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -63,8 +65,6 @@ jobs:
           echo "NPM token check (warn-only): ${{ steps.npm_check_ci.outputs.result }}"
         shell: bash
       - name: Upload coverage to Coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         if: env.COVERALLS_REPO_TOKEN != ''
         uses: coverallsapp/github-action@v1
         with:
@@ -73,7 +73,7 @@ jobs:
         # env already set above
 
       - name: Comment with Coveralls link (PRs only)
-        if: github.event_name == 'pull_request' && ${{ secrets.COVERALLS_REPO_TOKEN }}
+        if: github.event_name == 'pull_request' && env.COVERALLS_REPO_TOKEN != ''
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
