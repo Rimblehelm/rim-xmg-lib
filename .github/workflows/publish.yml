@@ -64,6 +64,12 @@ jobs:
           else
             echo "Configuring npm auth for GitHub Packages";
             npm config set //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN;
+                - name: Set scoped registry for npmjs (if publishing there)
+                  if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.use_npm == 'true' }}
+                  run: |
+                    SCOPE=$(node -p "require('./package.json').name.split('/')[0]");
+                    echo "Setting $SCOPE:registry to $PUBLISH_REGISTRY";
+                    npm config set ${SCOPE}:registry $PUBLISH_REGISTRY;
           fi
 
       - name: Publish to npm registry
