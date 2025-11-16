@@ -27,6 +27,7 @@ jobs:
   prepare:
     outputs:
       release_body: ${{ steps.release_notes.outputs.body }}
+      tag_name: ${{ steps.tag_name.outputs.tag }}
     name: Prepare release
     runs-on: ubuntu-latest
     env:
@@ -40,6 +41,26 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
+
+      - name: Determine tag name (tags vs manual dispatch)
+        id: tag_name
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF##*/}"
+          else
+            VERSION=$(node -p 'require("./package.json").version')
+            TAG="v${VERSION}"
+            git fetch --tags
+            if git rev-parse "$TAG" >/dev/null 2>&1; then
+              echo "Tag $TAG already exists (manual dispatch)."
+            else
+              echo "Creating tag $TAG (manual dispatch)."
+              git tag "$TAG"
+              git push origin "$TAG"
+            fi
+          fi
+          echo "Resolved tag: $TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -68,7 +89,7 @@ jobs:
       - name: Create release notes for tag
         id: release_notes
         run: |
-          TAG="${GITHUB_REF##*/}"
+          TAG="${{ steps.tag_name.outputs.tag }}"
           VERSION="${TAG#v}"
           # Extract content between the version header and the next header
           sed -n "/#### \[${TAG}\]/,/^#### /p" CHANGELOG.md | sed '1d;$d' > release-notes.md || true
@@ -116,7 +137,7 @@ jobs:
       - name: Show release notes in logs (optional)
         if: always()
         run: |
-          echo "---- Release notes for ${GITHUB_REF##*/} ----"
+          echo "---- Release notes for ${{ steps.tag_name.outputs.tag }} ----"
           cat release-notes.md || echo "(no release-notes.md generated)"
 
       - name: Upload release notes artifact (for manual review)
@@ -133,7 +154,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          TAG="${GITHUB_REF##*/}"
+          TAG="${{ steps.tag_name.outputs.tag }}"
           # Prefer `main` if it exists; otherwise fall back to repository default
           if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
             DEFAULT_BRANCH="main"
@@ -193,6 +214,7 @@ jobs:
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
+          tag: ${{ needs.prepare.outputs.tag_name }}
+          name: ${{ needs.prepare.outputs.tag_name }}
           body: ${{ needs.prepare.outputs.release_body }}
+          allowUpdates: true
