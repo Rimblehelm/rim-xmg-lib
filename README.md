@@ -41,6 +41,22 @@ To publish from the `Publish` workflow to npmjs.org via manual dispatch, use the
 
 This will switch the registry to `https://registry.npmjs.org/` and use `NPM_TOKEN` to authenticate.
 
+### Publishing details & troubleshooting
+
+- npm Automation token: If your npm account requires 2FA for publishing, you must create an "Automation" token on npmjs (Profile → Access Tokens → Create New Token → Automation) and add it as `NPM_TOKEN` in your repository secrets. Personal 2FA codes or interactive tokens will not work in CI and will cause an `EOTP` error.
+- Quick GH CLI dispatch (npm):
+
+```bash
+gh workflow run "Publish" --ref master --repo rimblehelm/rim-xmg-lib --field use_npm=true
+```
+
+- How the workflow helps debug:
+	- The `Check NPM token (whoami)` step authenticates to the configured registry and prints the npm username — this confirms your token is valid.
+	- The new `Debug npm config and whoami` step prints the `npm` global registry and the resolved scoped registry for your package scope so you can confirm the publish target.
+	- The `Publish to npm registry (EOTP aware)` step captures `npm` logs and prints a helpful remediation message if `EOTP` (2FA) or `401`/`Unauthorized` errors occur.
+
+If you need help creating an npm Automation token I can add a short visual guide or a script to validate the token locally.
+
 Generate API docs locally:
 
 ```bash
